@@ -1,0 +1,17 @@
+Colores Hackathon 
+rgb(83, 144, 113) --Enlaces, Segundo 4
+rgb(78, 161, 117) --Títulos, Quinto  3 activo
+rgb(129, 186, 157) --Bordes, Tercero 2
+rgb(164, 204, 185)
+rgb(104, 169, 85) --Botones, Primero 1 activo2
+rgb(171, 198, 99)  --
+rgb(138, 138, 138) -- Texto, Cuarto
+rgb(255, 255, 255)  --Tercero
+rgb(241, 241, 241)  --Quinto
+
+Green Hackathon Agrotech
+Dos puntos al final de datos register.
+Después de registrase mostrar mmensaje Gracias por part..
+La foto debe tener relación con Agro y Tecnología
+Fondo de la ESPAM en el login
+Login sacar el gracias y poner el nombre del evento completo

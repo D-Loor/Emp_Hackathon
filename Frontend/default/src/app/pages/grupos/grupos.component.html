@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col-sm-12">
+    
+      <app-card [title]="'Grupos Conformados'" [classHeader]="true" [blockClass]="'table-border-style'">
+        <span class="code-header">Datos de los Participantes y Grupo al que pertenecen.</span>
+        <div _ngcontent-wql-c3="" class="auth-box contenedor">     
+
+          <div class="botones">
+            <button _ngcontent-qfj-c5="" (click)="eliminar()" *ngIf="grupos" class="btn btn-warning  eliminar"><i _ngcontent-qfj-c5="" class="icofont icofont-trash"></i>Eliminar Grupos</button>     
+            <button _ngcontent-qfj-c5="" (click)="reporte()" *ngIf="grupos" class="btn btn-success"><i _ngcontent-qfj-c5="" class="icofont icofont-file-pdf"></i>Generar PDF</button>
+          </div>
+          
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+              <tr>
+                <th>Grupo</th>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Cédula</th>
+                <th>Carrera</th>
+                
+              </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of Gestu " >
+                  <th scope="row">{{item.grupo}}</th>
+                  <td>{{item.nombres}}</td>
+                  <td>{{item.apellidos}}</td>
+                  <td>{{item.cedula}}</td>
+                  <td>{{item.nombre}}</td>
+                
+                </tr>
+            
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </app-card>
+    
+  </div>
+</div>

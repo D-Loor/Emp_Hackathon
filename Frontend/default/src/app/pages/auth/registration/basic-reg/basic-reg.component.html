@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hackathon</title>
+  </head>
+
+  <body>
+    <div class="bg">
+      <div class="login-wrapper">
+        <div class="login-form">
+          
+          <div class="row m-b-20">
+            <div class="text-center col-md-12 ">
+              <div class="thumbnail_container">
+                <div class="thumbnail">
+                  <img src="assets/images/auth/hackathon.png" class="logo" alt="logo.png">
+                </div>
+              </div>
+            </div>
+            <!-- <div class="col-md-12">
+              <h3 class="text-center txt-primary evento">  Green Hackathon Agrotech</h3>
+            </div> -->
+          </div>
+          <div class="subtext">Para registarte debes completar los siguientes datos:</div>
+          <form action="" >
+            <div class="input-wrap">
+              <input type="text" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57' autocomplete="off" required name="cedula" id="cedula" [(ngModel)]="cedula" [class]="ClsCedula" (change)="ClsCedula=''"  (blur)="validarC()"/>
+              <label for="ci">Cédula</label>
+            </div>
+            <div class="input-wrap">
+              <input type="text" autocomplete="off" required name="nombres" id="nombres" [(ngModel)]="nombres" [class]="ClsNombres" (change)="ClsNombres=''" />
+              <label for="nombres">Nombres</label>
+            </div>
+            <div class="input-wrap">
+              <input type="text" autocomplete="off" required name="apellidos" id="apellidos" [(ngModel)]="apellidos" [class]="ClsApellidos" (change)="ClsApellidos=''" />
+              <label for="apellidos">Apellidos</label>
+            </div>
+            <div class="input-wrap">
+              <select id="country" name="carrera" id="carrera" [(ngModel)]="carrera" required [class]="ClsCarrera" (change)="ClsCarrera=''" >
+                <option *ngFor="let item of Array_Carrera" value="{{item.id_carrera}}">{{item.nombre}}</option>
+              </select>
+              <label for="ci">Carrera</label>
+            </div>
+            <div class="input-wrap">
+              <button  [disabled]="invalido"  class="btn" type="button" (click)="Registrar()">Registrar</button>
+            </div>
+          </form>                 
+          
+          <hr />
+          <br>
+          <div class="row">
+            <div class="col-md-10">
+              <p class="text-inverse text-left m-b-0"  *ngIf="registro!=true">Green Hackathon Agrotech.</p>
+              <p class="text-inverse text-left m-b-0"  *ngIf="registro==true">Gracias por participar en Hackathon.</p>
+              <p class="text-inverse text-left">Copyright © 2021 All Rights Reserved by <a href="http://www.espam.edu.ec" target="_blank" rel="noopener noreferrer"><b>ESPAM MFL.</b></a></p>
+            </div>
+            <div class="col-md-2">
+              <img src="assets/images/auth/Logo-small-bottom.png" alt="small-logo.png">
+            </div>
+          </div>
+        </div>
+        <div class="login-info">
+
+        </div>
+      </div>
+    </div>
+    
+   
+  </body>
+
+</html>
