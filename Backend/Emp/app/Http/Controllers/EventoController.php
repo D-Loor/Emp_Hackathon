@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Estudiante;
+use App\Models\Evento;
 use Illuminate\Http\Request;
 
-class EstudianteController extends Controller
+class EventoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,14 +14,13 @@ class EstudianteController extends Controller
      */
     public function index()
     {
-        $datos=Estudiante::with('carrera')->get();
+        $datos=Evento::all();
         $num_rows = count($datos);
 
         if($num_rows!=0){
             return response()->json(['result'=>$datos , 'code'=>'201']);
         }else
             return response()->json(['mensaje'=>"No hay registros", 'code'=>'202']);
-    
     }
 
     /**
@@ -42,51 +41,39 @@ class EstudianteController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $valida=Estudiante::where('cedula', $request->cedula)->get()->first();
+        $valida=Evento::where('evento', $request->evento)->get();
         if( $valida!= null){
-            return response()->json(['result'=>"Estudiante ya se encuentra registrado", 'code'=>'400']);
+            return response()->json(['result'=>"Evento ya se encuentra registrado", 'code'=>'400']);
         }else{
 
-            $datos=new Estudiante();
-            $datos->nombres=$request->nombres;
-            $datos->apellidos=$request->apellidos;
-            $datos->cedula=$request->cedula;
-            $datos->id_carrera=$request->id_carrera;
-            $datos->id_evento=$request->id_evento;
+            $datos=new Evento();
+            $datos->evento=$request->evento;
+            $datos->estado=$request->estado;
             $datos->save();
 
             return response()->json(['result'=>"Registro Exitoso", 'code'=>'201']);
         
         }
-        
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Estudiante  $estudiante
+     * @param  \App\Models\Evento  $evento
      * @return \Illuminate\Http\Response
      */
-    public function show($id_evento)
+    public function show(Evento $evento)
     {
-        $datos=Estudiante::with('carrera')->where('id_evento',$id_evento)->get();
-        $num_rows = count($datos);
-
-        if($num_rows!=0){
-            return response()->json(['result'=>$datos , 'code'=>'201']);
-        }else
-            return response()->json(['mensaje'=>"No hay registros", 'code'=>'202']);
-    
+        
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Estudiante  $estudiante
+     * @param  \App\Models\Evento  $evento
      * @return \Illuminate\Http\Response
      */
-    public function edit(Estudiante $estudiante)
+    public function edit(Evento $evento)
     {
         //
     }
@@ -95,28 +82,45 @@ class EstudianteController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Estudiante  $estudiante
+     * @param  \App\Models\Evento  $evento
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Estudiante $estudiante)
+    public function update(Request $request)
     {
-        //
+        $datos=Evento::find($request->id_evento);
+
+        if($datos != null){
+            $datos->evento=$request->evento;
+            $datos->estado=$request->estado;
+            $datos->update();
+        }else
+                return response()->json(['result'=>"Registro Exitoso", 'code'=>'201']);
+
+    }
+
+    public function activo(){
+        $datos=Evento::where('estado', 1)->get();
+        $num_rows = count($datos);
+
+        if($num_rows!=0){
+            return response()->json(['result'=>$datos , 'code'=>'201']);
+        }else
+            return response()->json(['mensaje'=>"No hay registros", 'code'=>'202']);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Estudiante  $estudiante
+     * @param  \App\Models\Evento  $evento
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id_estudiante)
+    public function destroy($id_evento)
     {
-        $datos=Estudiante::find($id_estudiante);
+        $datos=Evento::find($id_evento);
         if($datos != null){
             $datos->delete();
             return response()->json(['result'=>"Dato Eliminado", 'code'=>'201']);
         }else
         return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
-
     }
 }

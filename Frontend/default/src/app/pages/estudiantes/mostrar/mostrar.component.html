@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="col-sm-12">
+      
+        <app-card [title]="'Estudiantes Registrados'" [classHeader]="true" [blockClass]="'table-border-style'">
+          <span class="code-header">Estudiantes registrados por evento.</span>
+          <div _ngcontent-wql-c3="" class="auth-box contenedor">     
+  
+            <div class="row">
+                <label _ngcontent-qfj-c2="" class="col-7 col-sm-4 col-form-label" for="example-text-input">Número de estudiantes por grupo</label>
+                <div _ngcontent-qfj-c2="" class="col-5 col-sm-2 divisor1">
+                    <select id="even" [disabled]='eventos.length==0' name="even" id="even" [(ngModel)]="even" required [class]="ClsEvento" (change)="ClsEvento='form-control'" >
+                        <option *ngFor="let item of eventos" value="{{item.id_evento}}">{{item.evento}}</option>
+                    </select>
+                </div>
+
+                    <button _ngcontent-qfj-c5="" (click)="cargar_estu(1)"  *ngIf="eventos.length!=0" class="btn btn-success guarda"><i _ngcontent-qfj-c5="" class="icofont icofont-search"></i>Buscar</button>
+                    <button _ngcontent-qfj-c5=""  *ngIf="eventos.length==0" class="btn btn-success guarda disabled"><i _ngcontent-qfj-c5="" class="icofont icofont-search"></i>Buscar</button>
+                 
+            </div>
+           
+            
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                <tr>
+                  <th>Nombres</th>
+                  <th>Apellidos</th>
+                  <th>Cédula</th>
+                  <th>Carrera</th>
+                  <th>Opciones</th>
+                  
+                </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of estudiantes" >
+                    <td>{{item.nombres}}</td>
+                    <td>{{item.apellidos}}</td>
+                    <td>{{item.cedula}}</td>
+                    <td>{{item.carrera.nombre}}</td>
+                    <td class="text-center">
+                        <button _ngcontent-acp-c8="" (click)=" eliminar_estu(item.id_estudiante,item.nombres,item.apellidos)" class="btn btn-warning btn-outline-warning btn-icon botonedi"><i _ngcontent-acp-c8="" class="icofont icofont-trash icono"></i></button>
+                    </td> 
+                  
+                  </tr>
+              
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </app-card>
+      
+    </div>
+  </div>

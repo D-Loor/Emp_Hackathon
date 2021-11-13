@@ -1,17 +1,15 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { EventosModule } from '../pages/eventos/eventos/eventos.module';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
-export class EstudiantesService {
+export class EventosService {
 
   constructor(private http:HttpClient) { }
 
-
   registrar(data:any){
-    let  url = 'http://127.0.0.1:8000/api/Estudiante';
+    let  url = 'http://127.0.0.1:8000/api/Evento';
     return new Promise ((resolve, reject) => {
       this.http.post(url,data).subscribe(res => {
         resolve(res);
@@ -20,8 +18,8 @@ export class EstudiantesService {
       });
     });
   }
-  cargar_estudiantes() {
-    let  url = 'http://127.0.0.1:8000/api/Estudiante';
+  cargar() {
+    let  url = 'http://127.0.0.1:8000/api/Evento';
     return new Promise ((resolve, reject) => {
       this.http.get(url).subscribe(res => {
         resolve(res);
@@ -31,8 +29,8 @@ export class EstudiantesService {
     });
   }
 
-  cargar_estu_evento(evento) {
-    let  url = 'http://127.0.0.1:8000/api/Estudiante/'+evento;
+  activo(){
+    let  url = 'http://127.0.0.1:8000/api/EventoActivo';
     return new Promise ((resolve, reject) => {
       this.http.get(url).subscribe(res => {
         resolve(res);
@@ -42,8 +40,8 @@ export class EstudiantesService {
     });
   }
 
-  eliminar_estudiante(id) {
-    let  url = 'http://127.0.0.1:8000/api/Estudiante/'+id;
+  eliminar(id) {
+    let  url = 'http://127.0.0.1:8000/api/Evento/'+id;
     return new Promise ((resolve, reject) => {
       this.http.delete(url).subscribe(res => {
         resolve(res);
@@ -52,4 +50,5 @@ export class EstudiantesService {
       });
     });
   }
+
 }

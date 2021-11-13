@@ -25,6 +25,8 @@ Route::get('ValidarUsuario/{correo}/{pass}','App\Http\Controllers\UsuarioControl
 Route::resource('Carrera','App\Http\Controllers\CarreraController');
 Route::resource('Estudiante','App\Http\Controllers\EstudianteController');
 Route::resource('Grupo','App\Http\Controllers\GrupoController');
+Route::resource('Evento','App\Http\Controllers\EventoController');
+Route::get('EventoActivo','App\Http\Controllers\EventoController@activo');
 Route::delete('GrupoEli','App\Http\Controllers\GrupoController@eliminar');
 
 //reportes

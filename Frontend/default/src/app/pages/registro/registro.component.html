@@ -10,7 +10,7 @@
            
             <label _ngcontent-qfj-c2="" class="col-7 col-sm-4 col-form-label" for="example-text-input">Número de estudiantes por grupo</label>
             <div _ngcontent-qfj-c2="" class="col-5 col-sm-2 divisor1">
-              <input _ngcontent-qfj-c2="" [class]="ClsParticipantes" autocomplete="off" [disabled]="creados || guardado" (change)="ClsParticipantes='form-control'" onkeypress='return event.charCode >= 51 && event.charCode <= 57' maxlength="1"
+              <input _ngcontent-qfj-c2="" [class]="ClsParticipantes" autocomplete="off" [disabled]="creados || guardado" (change)="ClsParticipantes='form-control'; valparti()" onkeypress='return event.charCode >= 51 && event.charCode <= 57' maxlength="1"
               name="participantes" id="participantes" [(ngModel)]="participantes" placeholder="Ingrese valor" type="text">
             </div>
 
@@ -19,12 +19,6 @@
               <span class="feed">Agregue las restricciones por grupo:</span>
             </div>
             
-      
-            <!-- <label _ngcontent-qfj-c2="" class="col-7 col-sm-3 col-form-label " for="example-text-input">N° de estudiantes por carrera</label>
-            <div _ngcontent-qfj-c2="" class="col-5 col-sm-3 divisor2">
-              <input _ngcontent-qfj-c2="" [class]="ClsCarrera" class=" ClsCarrera"onkeypress='return event.charCode >= 48 && event.charCode <= 57' maxlength="1"
-              name="carreras" id="carreras" [(ngModel)]="carreras" placeholder="Ingrese número" (change)="ClsCarrera='form-control'" type="text">
-            </div> -->
 
               <label _ngcontent-qfj-c2="" class="col-6 col-sm-2 col-form-label " for="example-text-input">Carrera</label>
               <div _ngcontent-qfj-c2="" class="col-6 col-sm-4 divisor2">
@@ -61,7 +55,7 @@
                         <td>{{item.nombre}}</td>
                         <td class="text-center">{{item.cantidad}} </td>
                         <td class="text-center">
-                          <button _ngcontent-acp-c8="" *ngIf="!guardado" (click)="eliminarR(item.posi,item.nombre)" class="btn btn-warning btn-outline-warning btn-icon botonedi"><i _ngcontent-acp-c8="" class="icofont icofont-trash icono"></i></button>
+                          <button _ngcontent-acp-c8="" *ngIf="!guardado" (click)="eliminarR(item.posi,item.nombre,item.cantidad)" class="btn btn-warning btn-outline-warning btn-icon botonedi"><i _ngcontent-acp-c8="" class="icofont icofont-trash icono"></i></button>
                           <button _ngcontent-acp-c8="" *ngIf="guardado" class="btn btn-warning btn-outline-warning btn-icon botonedi disabled"><i _ngcontent-acp-c8="" class="icofont icofont-trash icono"></i></button>                        
                         </td>        
                       </tr>
@@ -80,10 +74,10 @@
           
           <div _ngcontent-wql-c3="" class="col-md-12">
             <button _ngcontent-wql-c3=""
-            class="btn btn-success  btn-block" type="button" *ngIf="!creados && !guardado" (click)="conformar()">Conformar Grupos</button>
+            class="btn btn-success  btn-block" type="button" *ngIf="!creados && !guardado &&  !ValR" (click)="conformar()">Conformar Grupos</button>
           
             <button _ngcontent-wql-c3=""
-            class="btn btn-success  btn-block disabled" type="button" disabled *ngIf="creados || guardado" >Conformar Grupos</button>
+            class="btn btn-success  btn-block disabled" type="button" disabled *ngIf="creados || guardado || ValR" >Conformar Grupos</button>
 
           </div>
             

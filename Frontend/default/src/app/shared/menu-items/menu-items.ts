@@ -33,21 +33,61 @@ export interface Menu {
 const MENUITEMS = [
  
   {
-    label: 'Grupos de Estudiantes',
+    label: 'Grupos',
     main: [
       {
         state: 'generargrupos',
         short_label: 'G',
-        name: 'Generar grupos',
+        name: 'Conformar Grupos ',
         type: 'link',
-        icon: 'ti-user'
+        icon: 'ti-check-box'
       },
       {
         state: 'mostrargrupos',
         short_label: 'M',
-        name: 'Mostrar grupos',
+        name: 'Mostrar Grupos',
+        type: 'link',
+        icon: 'ti-clipboard'
+      }
+    ]
+  },
+  {
+    label: 'Estudiantes',
+    main: [
+      
+      {
+        state: 'estudiantes',
+        short_label: 'E',
+        name: 'Agregar Estudiante',
         type: 'link',
         icon: 'ti-user'
+      },
+      {
+        state: 'mostrarestudiantes',
+        short_label: 'H',
+        name: 'Mostrar Estudiantes',
+        type: 'link',
+        icon: 'ti-clipboard'
+      }
+    ]
+  },
+  {
+    label: 'Eventos',
+    main: [
+      
+      {
+        state: 'eventos',
+        short_label: 'E',
+        name: ' Agregar Eventos',
+        type: 'link',
+        icon: 'ti-cup'
+      },
+      {
+        state: 'historialeventos',
+        short_label: 'H',
+        name: 'Historial de Eventos',
+        type: 'link',
+        icon: 'ti-clipboard'
       }
     ]
   },

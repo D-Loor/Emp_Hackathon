@@ -16,11 +16,13 @@ class CreateEstudiantesTable extends Migration
         Schema::create('estudiantes', function (Blueprint $table) {
             $table->bigIncrements('id_estudiante');
             $table->unsignedBigInteger('id_carrera');
+            $table->unsignedBigInteger('id_evento');
             $table->string('nombres');
             $table->string('apellidos');
             $table->string('cedula');
            
             $table->foreign('id_carrera')->references('id_carrera')->on('carreras')->onDelete('cascade');
+            $table->foreign('id_evento')->references('id_evento')->on('eventos')->onDelete('cascade');
 
         });
     }

@@ -46,7 +46,15 @@
               <label for="ci">Carrera</label>
             </div>
             <div class="input-wrap">
-              <button  [disabled]="invalido"  class="btn" type="button" (click)="Registrar()">Registrar</button>
+              <select [disabled]='!eventoa' id="evento" name="evento" id="evento" [(ngModel)]="evento" required [class]="ClsEvento" (change)="ClsEvento=''" >
+                <option  *ngFor="let item of Array_Evento" value="{{item.id_evento}}">{{item.evento}}</option>
+              </select>
+              <label for="ci">Evento</label>
+            </div>
+            <div class="input-wrap">
+              <button  [disabled]="invalido"  class="btn" type="button" *ngIf="eventoa" (click)="Registrar()">Registrar</button>
+              <button  [disabled]="invalido"  class="btn disabled" *ngIf="!eventoa" type="button" >Registrar</button>
+
             </div>
           </form>                 
           

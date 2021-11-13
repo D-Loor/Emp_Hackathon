@@ -24,6 +24,26 @@ const routes: Routes = [
         path: 'mostrargrupos',
         canActivate:[GusuarioGuard],
         loadChildren: () => import('./pages/grupos/grupos.module').then(m => m.GruposModule)
+      },
+      {
+        path: 'estudiantes',
+        canActivate:[GusuarioGuard],
+        loadChildren: () => import('./pages/estudiantes/agregar/agregar.module').then(m => m.AgregarModule)
+      },
+      {
+        path: 'mostrarestudiantes',
+        canActivate:[GusuarioGuard],
+        loadChildren: () => import('./pages/estudiantes/mostrar/mostrar.module').then(m => m.MostrarModule)
+      },
+      {
+        path: 'eventos',
+        canActivate:[GusuarioGuard],
+        loadChildren: () => import('./pages/eventos/eventos/eventos.module').then(m => m.EventosModule)
+      },
+      {
+        path: 'historialeventos',
+        canActivate:[GusuarioGuard],
+        loadChildren: () => import('./pages/eventos/historial/historial.module').then(m => m.HistorialModule)
       }
     ]
   },

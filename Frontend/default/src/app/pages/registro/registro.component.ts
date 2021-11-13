@@ -3,6 +3,7 @@ import { EstudiantesService } from '../../servicios/estudiantes.service';
 import { CarrerasService } from '.././../servicios/carreras.service';
 import Swal from 'sweetalert2'
 import { GruposService } from '../../servicios/grupos.service';
+import { EventosService } from '../../servicios/eventos.service';
 
 @Component({
   selector: 'app-registro',
@@ -14,6 +15,7 @@ export class RegistroComponent implements OnInit {
   conformado=false;
   guardado=false;
   creados=false;
+  ValR=false;
 
   Datos = [];
   array = [];
@@ -26,7 +28,7 @@ export class RegistroComponent implements OnInit {
   cantidad;
   carreras;
   totalestu;
-
+  Nrestricciones=0;
   list= [];
 
 
@@ -34,7 +36,7 @@ export class RegistroComponent implements OnInit {
   ClsParticipantes="form-control";
   ClsCantidad="form-control";
 
-  constructor(private estudiante_service: EstudiantesService, private carrera_service: CarrerasService, private grupos_service:GruposService) { }
+  constructor(private evento_service: EventosService, private estudiante_service: EstudiantesService, private carrera_service: CarrerasService, private grupos_service:GruposService) { }
 
   cargarCarreras() {
     this.carrera_service.cargar_carreras().then(data =>{
@@ -54,6 +56,34 @@ export class RegistroComponent implements OnInit {
     }); 
    
 
+  }
+
+  valparti(){
+    if(this.CarreraCon.length>0){
+      if(parseInt(this.participantes)<this.Nrestricciones){
+        this.ClsParticipantes=" form-control TxtError";
+        this.ValR=true;
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+        
+        Toast.fire({
+          icon: 'error',
+          title: 'Las restricciones superan los participantes.'
+        })
+
+      }else
+      this.ValR=false;
+    }else 
+    this.ValR=false;
   }
 
   agregarR(){
@@ -108,6 +138,7 @@ export class RegistroComponent implements OnInit {
            'cantidad': parseInt(this.cantidad),
            'posi':tama
          };
+         this.Nrestricciones+=parseInt(this.cantidad);
          this.cantidad="";
          this.carrera=undefined;
          this.CarreraCon.push(dato);
@@ -137,7 +168,7 @@ export class RegistroComponent implements OnInit {
     }
   }
 
-  eliminarR(posi,nom){
+  eliminarR(posi,nom,canti){
     
     for (let i = 0; i < this.Array_Carrera.length; i++) {
        
@@ -149,30 +180,16 @@ export class RegistroComponent implements OnInit {
     for(let i = posi; i < this.CarreraCon.length; i++){
       this.CarreraCon[i].posi-=1;
     }
-
+    this.Nrestricciones-=canti;
     this.CarreraCon.splice(posi, 1);
 
   }
   ngOnInit() {
-    let dat=
-      {id:'1',name:'d'}
-    ;
-    this.list.push(dat);
-    dat=
-      {id:'0',name:'d'}
-    ;
-    this.list.push(dat);
-    dat=
-      {id:'2',name:'d'}
-    ;
-    this.list.push(dat);
-   
-    console.log(this.list);
-
     this.validar();
     this.cargarCarreras();
   }
 
+  
   guardar(){
 
     Swal.fire({
@@ -270,6 +287,7 @@ export class RegistroComponent implements OnInit {
       
       this.estudiante_service.cargar_estudiantes().then(data => {
         this.Datos = data['result'];
+        //console.log(this.Datos);
         this.agrupar();
         this.conformado=true;
       }).catch(error => {
@@ -308,7 +326,7 @@ export class RegistroComponent implements OnInit {
   }
 
   agrupar() {
-    //debugger
+    
     this.Gestu=[];
     this.array = this.Datos;
     let result = [];
@@ -325,6 +343,7 @@ export class RegistroComponent implements OnInit {
     carrN=parseInt(this.participantes)-carrN;
     
     //recorre todos los estudiantes
+    
     for (let i = 0; i < estuLength; i++) {
       random = Math.floor(Math.random() * intervalo); //posicion del estudiante aleatorio
       intervalo--;
@@ -338,7 +357,7 @@ export class RegistroComponent implements OnInit {
           }
         }        
       }
-      if(pertenece==true){
+      if(pertenece==true|| carrN!=0){
         //primer participante grupo 1
         if (nuevoLength == 0) {
           
@@ -441,7 +460,8 @@ export class RegistroComponent implements OnInit {
       this.array.splice(random, 1);
     }
 
-    debugger
+    console.log(result);
+
     for (let j = 1; j <= Grupos + 1; j++) {
 
       for (let x = 0; x <= this.CarreraCon.length; x++) {
