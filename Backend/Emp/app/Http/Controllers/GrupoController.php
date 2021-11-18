@@ -68,9 +68,20 @@ class GrupoController extends Controller
      * @param  \App\Models\Grupo  $grupo
      * @return \Illuminate\Http\Response
      */
-    public function show(Grupo $grupo)
+    public function show($id)
     {
-        //
+        $result=DB::table('grupos')->where('id_evento',$id)
+        ->join('estudiantes', function ($join) {
+            $join->on('grupos.id_estudiante', '=', 'estudiantes.id_estudiante')
+                 ->join('carreras','estudiantes.id_carrera', '=','carreras.id_carrera');
+        })->orderBy('grupo', 'ASC')->get();
+
+        $num_rows = count($result);
+
+        if($num_rows!=0){
+            return response()->json(['result'=>$result , 'code'=>'201']);
+        }else
+            return response()->json(['mensaje'=>"No hay registros", 'code'=>'202']);
     }
     
     /**
@@ -91,9 +102,15 @@ class GrupoController extends Controller
      * @param  \App\Models\Grupo  $grupo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Grupo $grupo)
+    public function update(Request $request)
     {
-        //
+        $datos=Grupo::find($request->id_grupo);
+        if($datos != null){
+            $datos->grupo=$request->grupo;
+            $datos->update();
+            return response()->json(['result'=>"Dato Actualizado", 'code'=>'201']);
+        }else
+            return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
     }
 
     /**
@@ -102,12 +119,17 @@ class GrupoController extends Controller
      * @param  \App\Models\Grupo  $grupo
      * @return \Illuminate\Http\Response
      */
-    public function destroy()
+    public function destroy($id_eli)
     {
-       
+        $datos=Grupo::find($id_eli);
+        if($datos != null){
+            $datos->delete();
+            return response()->json(['result'=>"Dato Eliminado", 'code'=>'201']);
+        }else
+        return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
 
     }
-    public function GenerarPDF($fecha){
+    public function GenerarPDF($id,$fecha){
 
         $valores = explode('-', $fecha);
         $dia = $valores[2];
@@ -153,24 +175,29 @@ class GrupoController extends Controller
                 break;
         }
 
-        $datos=DB::table('grupos')
+        $datos=DB::table('grupos')->where('id_evento',$id)
         ->join('estudiantes', function ($join) {
             $join->on('grupos.id_estudiante', '=', 'estudiantes.id_estudiante')
                  ->join('carreras','estudiantes.id_carrera', '=','carreras.id_carrera');
-        })
-        ->get();
+        })->orderBy('grupo', 'ASC')->get();
         
         return \PDF::loadView('ReporteGrupos', compact('datos','dia','mes','anio'))->setPaper('a4', 'scape')->stream('Reporte Hackathon '.$fecha.'.pdf');
 
     }
-    public function eliminar()
+    //----------------------------------------------------arreglar
+    public function eliminar($id)
     {
-        $datos=Grupo::all();
-        $num_rows = count($datos);
+        $result=DB::table('grupos')->where('id_evento',$id)
+        ->join('estudiantes', function ($join) {
+            $join->on('grupos.id_estudiante', '=', 'estudiantes.id_estudiante')
+                 ->join('carreras','estudiantes.id_carrera', '=','carreras.id_carrera');
+        })
+        ->get()->first();
 
-        if($num_rows!=0){
-            DB::table('grupos')->truncate();
-            
+        if($result!=null){
+            DB::table('grupos')->join('estudiantes','grupos.id_estudiante', '=', 'estudiantes.id_estudiante')
+            ->where('estudiantes.id_evento',$id)->delete();  
+
             return response()->json(['result'=>"Datos Eliminado", 'code'=>'201']);
 
         }else

@@ -42,7 +42,7 @@ export class MostrarComponent implements OnInit {
         
         Toast.fire({
           icon: 'info',
-          title: '¡No hay registro de estudiantes..!'
+          title: '¡No hay eventos registrados..!'
         })
       }
       

@@ -12,7 +12,7 @@ class Evento extends Model
     protected $table = 'eventos';
     protected $primaryKey = 'id_evento';
     protected $fillable = [
-         'evento', 'estado'
+         'evento', 'estado','fecha_inicio','fecha_fin'
     ];
     public function evento(){
         return $this->hasMany('App\Models\evento','id_evento');

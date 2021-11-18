@@ -1,10 +1,41 @@
+.divisor{
+    margin-bottom: 20px;
+}
 .botones{
     float: right !important;
     margin-bottom: 15px;
 }
-.eliminar{
+.espacio{
     margin-right:10px;
 }
 .contenedor{
     padding-top: 0px !important;
+}
+.botonedi{
+    border-radius: 0%;
+    width: 30px;
+    height: 30px;
+    padding: 0px;
+    margin-left:10px;
+}
+.icono{
+    margin-right: 0px;
+}
+.bot{
+    padding: 7px 19px;
+}
+.boton{
+    float: right !important;
+    margin-bottom: 20px;
+    padding: 7px 19px;
+}
+.contenido3{
+    padding-bottom: 0px;
+    padding-top: 0px;
+    margin-bottom: 0px;
+    
+}
+.cancel{
+    color: white;
+    background-color: rgb(158, 158, 158) !important;
 }

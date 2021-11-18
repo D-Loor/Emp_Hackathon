@@ -7,10 +7,16 @@
        
         <div class="row">
 
-           
-            <label _ngcontent-qfj-c2="" class="col-7 col-sm-4 col-form-label" for="example-text-input">Número de estudiantes por grupo</label>
+          <label _ngcontent-qfj-c2="" class="col-7 col-sm-2 col-form-label" for="example-text-input">Evento</label>
+          <div _ngcontent-qfj-c2="" class="col-5 col-sm-5 divisor1">
+              <select id="even" [disabled]='eventos.length==0' name="even" id="even" [(ngModel)]="even" required [class]="ClsEvento" (change)="ClsEvento='form-control'" >
+                  <option *ngFor="let item of eventos" value="{{item.id_evento}}">{{item.evento}}</option>
+              </select>
+          </div>
+          
+            <label _ngcontent-qfj-c2="" class="col-7 col-sm-3 col-form-label" for="example-text-input">Estudiantes por grupo</label>
             <div _ngcontent-qfj-c2="" class="col-5 col-sm-2 divisor1">
-              <input _ngcontent-qfj-c2="" [class]="ClsParticipantes" autocomplete="off" [disabled]="creados || guardado" (change)="ClsParticipantes='form-control'; valparti()" onkeypress='return event.charCode >= 51 && event.charCode <= 57' maxlength="1"
+              <input _ngcontent-qfj-c2="" [disabled]='eventos.length==0' [class]="ClsParticipantes" autocomplete="off" [disabled]="creados || guardado" (change)="ClsParticipantes='form-control'; valparti()" onkeypress='return event.charCode >= 51 && event.charCode <= 57' maxlength="1"
               name="participantes" id="participantes" [(ngModel)]="participantes" placeholder="Ingrese valor" type="text">
             </div>
 
@@ -74,10 +80,10 @@
           
           <div _ngcontent-wql-c3="" class="col-md-12">
             <button _ngcontent-wql-c3=""
-            class="btn btn-success  btn-block" type="button" *ngIf="!creados && !guardado &&  !ValR" (click)="conformar()">Conformar Grupos</button>
+            class="btn btn-success  btn-block" type="button" *ngIf="!creados && !guardado &&  !ValR  && eventos.length!=0" (click)="conformar()">Conformar Grupos</button>
           
             <button _ngcontent-wql-c3=""
-            class="btn btn-success  btn-block disabled" type="button" disabled *ngIf="creados || guardado || ValR" >Conformar Grupos</button>
+            class="btn btn-success  btn-block disabled" type="button" disabled *ngIf="creados || guardado || ValR || eventos.length==0" >Conformar Grupos</button>
 
           </div>
             

@@ -20,8 +20,9 @@ export class GruposService {
       });
     });
   }
-  cargar_grupos() {
-    let  url = 'http://127.0.0.1:8000/api/Grupo';
+ 
+  cargar_estu(id) {
+    let  url = 'http://127.0.0.1:8000/api/Grupo/'+id;
     return new Promise ((resolve, reject) => {
       this.http.get(url).subscribe(res => {
         resolve(res);
@@ -31,11 +32,35 @@ export class GruposService {
     });
   }
 
-   eliminar_grupos() {
-    let  url = 'http://127.0.0.1:8000/api/GrupoEli';
+   eliminar_estudiante_grupo(id) {
+    let  url = 'http://127.0.0.1:8000/api/Grupo/'+id;
     return new Promise ((resolve, reject) => {
       this.http.delete(url).subscribe(res => {
         resolve(res);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
+  eliminar_grupos(id) {
+    let  url = 'http://127.0.0.1:8000/api/GrupoEli/'+id;
+    return new Promise ((resolve, reject) => {
+      this.http.delete(url).subscribe(res => {
+        resolve(res);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
+  actualizar(data:any){
+    let  url = 'http://127.0.0.1:8000/api/GrupoActualizar';
+    return new Promise ((resolve, reject) => {
+      this.http.put(url,data).subscribe(res => {
+        resolve(res);{
+
+        }
       }, error => {
         reject(error);
       });

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Estudiante;
+use App\Models\Grupo;
 use Illuminate\Http\Request;
+use DB;
 
 class EstudianteController extends Controller
 {
@@ -70,14 +72,35 @@ class EstudianteController extends Controller
      */
     public function show($id_evento)
     {
-        $datos=Estudiante::with('carrera')->where('id_evento',$id_evento)->get();
-        $num_rows = count($datos);
+        
+            $datos=Estudiante::with('carrera')->where('id_evento',$id_evento)->get();
+            $num_rows = count($datos);
 
-        if($num_rows!=0){
-            return response()->json(['result'=>$datos , 'code'=>'201']);
-        }else
-            return response()->json(['mensaje'=>"No hay registros", 'code'=>'202']);
+            if($num_rows!=0){
+                return response()->json(['result'=>$datos , 'code'=>'201']);
+            }else
+                return response()->json(['mensaje'=>"No hay registros", 'code'=>'202']);
+
     
+    }
+    public function validar($id_evento)
+    {
+        $conformados=DB::table('grupos')
+        ->join('estudiantes','grupos.id_estudiante', '=', 'estudiantes.id_estudiante')
+        ->where('estudiantes.id_evento',$id_evento)->get();
+
+        if(count($conformados)==0){
+            $datos=Estudiante::with('carrera')->where('id_evento',$id_evento)->get();
+            $num_rows = count($datos);
+
+            if($num_rows!=0){
+                return response()->json(['result'=>$datos , 'code'=>'201']);
+            }else
+                return response()->json(['mensaje'=>"No hay registros", 'code'=>'202']);
+
+        }else
+            return response()->json(['mensaje'=>"Grupos ya conformados", 'code'=>'400']);
+
     }
 
     /**

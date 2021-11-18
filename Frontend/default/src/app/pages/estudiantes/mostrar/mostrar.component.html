@@ -6,8 +6,8 @@
           <div _ngcontent-wql-c3="" class="auth-box contenedor">     
   
             <div class="row">
-                <label _ngcontent-qfj-c2="" class="col-7 col-sm-4 col-form-label" for="example-text-input">Número de estudiantes por grupo</label>
-                <div _ngcontent-qfj-c2="" class="col-5 col-sm-2 divisor1">
+                <label _ngcontent-qfj-c2="" class="col-7 col-sm-2 col-form-label" for="example-text-input">Evento</label>
+                <div _ngcontent-qfj-c2="" class="col-5 col-sm-6 divisor1">
                     <select id="even" [disabled]='eventos.length==0' name="even" id="even" [(ngModel)]="even" required [class]="ClsEvento" (change)="ClsEvento='form-control'" >
                         <option *ngFor="let item of eventos" value="{{item.id_evento}}">{{item.evento}}</option>
                     </select>

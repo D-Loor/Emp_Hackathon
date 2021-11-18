@@ -78,7 +78,7 @@ const MENUITEMS = [
       {
         state: 'eventos',
         short_label: 'E',
-        name: ' Agregar Eventos',
+        name: ' Eventos',
         type: 'link',
         icon: 'ti-cup'
       },

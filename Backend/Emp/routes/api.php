@@ -27,7 +27,9 @@ Route::resource('Estudiante','App\Http\Controllers\EstudianteController');
 Route::resource('Grupo','App\Http\Controllers\GrupoController');
 Route::resource('Evento','App\Http\Controllers\EventoController');
 Route::get('EventoActivo','App\Http\Controllers\EventoController@activo');
-Route::delete('GrupoEli','App\Http\Controllers\GrupoController@eliminar');
-
+Route::delete('GrupoEli/{id}','App\Http\Controllers\GrupoController@eliminar');
+Route::put('EventoActualizar','App\Http\Controllers\EventoController@update');
+Route::put('GrupoActualizar','App\Http\Controllers\GrupoController@update');
+Route::get('ValEstudiante/{id}','App\Http\Controllers\EstudianteController@validar');
 //reportes
-Route::get('ReporteGrupos/{fecha}','App\Http\Controllers\GrupoController@GenerarPDF');
+Route::get('ReporteGrupos/{id}/{fecha}','App\Http\Controllers\GrupoController@GenerarPDF');

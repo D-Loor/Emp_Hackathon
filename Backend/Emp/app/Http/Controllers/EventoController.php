@@ -42,13 +42,16 @@ class EventoController extends Controller
     public function store(Request $request)
     {
         $valida=Evento::where('evento', $request->evento)->get();
-        if( $valida!= null){
+        $count=count($valida);
+        if( $count !=0){
             return response()->json(['result'=>"Evento ya se encuentra registrado", 'code'=>'400']);
         }else{
 
             $datos=new Evento();
             $datos->evento=$request->evento;
             $datos->estado=$request->estado;
+            $datos->fecha_inicio=$request->fecha_inicio;
+            $datos->fecha_fin=$request->fecha_fin;
             $datos->save();
 
             return response()->json(['result'=>"Registro Exitoso", 'code'=>'201']);
@@ -87,15 +90,25 @@ class EventoController extends Controller
      */
     public function update(Request $request)
     {
-        $datos=Evento::find($request->id_evento);
+        $valida=Evento::where('evento', $request->evento)->where('id_evento','!=',$request->id_evento)->get();
+        $count=count($valida);
+        if( $count ==0){
 
-        if($datos != null){
-            $datos->evento=$request->evento;
-            $datos->estado=$request->estado;
-            $datos->update();
-        }else
+            $datos=Evento::find($request->id_evento);
+            if($datos != null){
+                
+                $datos->evento=$request->evento;
+                $datos->estado=$request->estado;            
+                $datos->fecha_inicio=$request->fecha_inicio;
+                $datos->fecha_fin=$request->fecha_fin;
+                $datos->update();
                 return response()->json(['result'=>"Registro Exitoso", 'code'=>'201']);
-
+            
+            
+            }else
+                return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
+        }else
+            return response()->json(['result'=>"Registro duplicado", 'code'=>'400']);
     }
 
     public function activo(){

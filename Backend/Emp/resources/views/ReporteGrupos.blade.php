@@ -16,6 +16,8 @@
            
         }
       
+        
+        /* #header { position: fixed; left: 0px; top: 0; right: 0px; height: 150px; text-align: center; } */
         *{
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 
@@ -41,9 +43,13 @@
             padding-top: 0px !important;
             margin-top: 0px !important;
         }
+        h4{
+            padding-bottom: 0px !important;
+            margin-bottom: 0px !important;
+        }
 
         table{
-            padding-top:10px;
+            margin-top:20px;
             border-collapse: collapse;
             text-align: center;
         }
@@ -78,38 +84,81 @@
             top: 98%;
             position:absolute;
         }
+        .titulos{
+            width: 30px !important;
+            background-color: rgb(209, 209, 209);
+        }
+        /*
+        rgb(171, 198, 99)
+        rgb(104, 169, 85)
+        rgb(129, 186, 157)
+
+        */
+        .f1{
+            width: 30px !important;
+            background-color: #ffda9e;
+        }
+        .f2{
+            width: 30px !important;
+            background-color: #d8f79a ;
+        }
+        .f3{
+            width: 30px !important;
+            background-color: #add5fa;
+        }
+        .f4{
+            width: 30px !important;
+            background-color: #fdf9c4;
+        }
+        .f5{
+            width: 30px !important;
+            background-color: #b0f2c2;
+        }
+        .f6{
+            width: 30px !important;
+            background-color: #fabfb7;
+        }
+        .f7{
+            width: 30px !important;
+            background-color: #fdfd96;
+        }
+        .f8{
+            width: 30px !important;
+            background-color: #95b8f6;
+        }
+        .f9{
+            width: 30px !important;
+            background-color: #ff9688;           
+        }
+        .f10{
+            width: 30px !important;
+            background-color: #d3bcf6;
+        }
+        
     </style>
 </head>
 <body>
 
    
   <div class="contenedor">
+    
+  <!-- <div id="header">
+    <h1>Widgets Express</h1>
+  </div> -->
 
     <img src="imagenes/espam.png" class="logo1">
     <img src="imagenes/hackathon.png" class="logo2">
 
-    <!-- <h4 class="titu">REGISTRO DE LAS 20 PRINCIPALES CAUSAS DE MORBILIDAD EN REHABILITACIÓN FÍSICA</h4> -->
     <div class="contenido">
 
-    <div>
-        <h4>Green Hackathon Agrotech</h4>
-    </div>
-        <!-- <div >
-            <div class="items">
-            <span class="item ">PROVINCIA:</span>
-                MANABÍ
-            <span class="item subt">MES:</span>
-                
-            <span class="item subt">AÑO:</span>
-                
-            </div>
-
-        </div> -->
-
+        <div>
+            <h4>Green Hackathon Agrotech</h4>
+        </div>
+    
         <table class="espacios">
             <thead>
 
-                <tr>
+                <tr class="titulos">
                     <th class="grupo"> Grupo</th>
                     <th class="nombres"> Nombres</th>
                     <th class="nombres"> Apellidos</th>
@@ -122,7 +171,37 @@
                 @foreach ($datos as $item)
 
                     <tr>
-                        <td class="grupo">{{$item->grupo}}</td>
+                        @if ( $item->grupo == 1) 
+                            <th class="f1">{{$item->grupo}}</th>
+                        @endif   
+                        @if ( $item->grupo == 2) 
+                            <th class="f2">{{$item->grupo}}</th>
+                        @endif
+                        @if ( $item->grupo == 3) 
+                            <th class="f3">{{$item->grupo}}</th>
+                        @endif
+                        @if ( $item->grupo == 4) 
+                            <th class="f4">{{$item->grupo}}</th>
+                        @endif
+                        @if ( $item->grupo == 5) 
+                            <th class="f5">{{$item->grupo}}</th>
+                        @endif
+                        @if ( $item->grupo == 6) 
+                            <th class="f6">{{$item->grupo}}</th>
+                        @endif
+                        @if ( $item->grupo == 7) 
+                            <th class="f7">{{$item->grupo}}</th>
+                        @endif
+                        @if ( $item->grupo == 8) 
+                            <th class="f8">{{$item->grupo}}</th>
+                        @endif
+                        @if ( $item->grupo == 9) 
+                            <th class="f9">{{$item->grupo}}</th>
+                        @endif
+                        @if ( $item->grupo == 10) 
+                            <th class="f10">{{$item->grupo}}</th>
+                        @endif
+
                         <td class="nombres">{{$item->nombres}}</td>
                         <td class="nombres">{{$item->apellidos}}</td>
                         <td class="cedula">{{$item->cedula}}</td>
@@ -143,16 +222,7 @@
     <div class="fecha">
         <spam> Reporte generado el {{$dia}} de {{$mes}} de {{$anio}}</spam>
     </div>
-        <!-- <div>
-            <div class="doc">
-                <div class="firma"></div>
-                <div class="antFirma">LCDO. CARLOS ZAMBRANO M.</div>
-                    <div class="cargo"> ÁREA  DE  REHABILITACIÓN FÍSICA
-                </div>
-
-            </div>
-
-        </div> -->
+        
 
 
 </div>

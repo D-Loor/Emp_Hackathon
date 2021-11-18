@@ -30,6 +30,16 @@ export class EstudiantesService {
       });
     });
   }
+  validar_estu_evento(evento) {
+    let  url = 'http://127.0.0.1:8000/api/ValEstudiante/'+evento;
+    return new Promise ((resolve, reject) => {
+      this.http.get(url).subscribe(res => {
+        resolve(res);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
 
   cargar_estu_evento(evento) {
     let  url = 'http://127.0.0.1:8000/api/Estudiante/'+evento;

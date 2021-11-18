@@ -15,7 +15,7 @@
 
             <label _ngcontent-qfj-c2="" class="col-5 col-sm-2 col-form-label " for="example-text-input">Evento</label>
             <div _ngcontent-qfj-c2="" class="col-7 col-sm-4 divisor">
-                <select id="evento" name="evento" id="evento" [(ngModel)]="evento" required [class]="ClsEvento" (change)="ClsEvento='form-control'" >
+                <select id="evento" name="evento" [disabled]="array_eventos.length==0" id="evento" [(ngModel)]="evento" required [class]="ClsEvento" (change)="ClsEvento='form-control'" >
                 <option *ngFor="let item of array_eventos" value="{{item.id_evento}}">{{item.evento}}</option>
                 </select>              
             </div>

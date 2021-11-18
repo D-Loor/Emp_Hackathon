@@ -5,6 +5,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class EventosService {
+  eliminar_estudiante(id: any) {
+    throw new Error('Method not implemented.');
+  }
 
   constructor(private http:HttpClient) { }
 
@@ -12,6 +15,16 @@ export class EventosService {
     let  url = 'http://127.0.0.1:8000/api/Evento';
     return new Promise ((resolve, reject) => {
       this.http.post(url,data).subscribe(res => {
+        resolve(res);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+  actualizar(data:any){
+    let  url = 'http://127.0.0.1:8000/api/EventoActualizar';
+    return new Promise ((resolve, reject) => {
+      this.http.put(url,data).subscribe(res => {
         resolve(res);
       }, error => {
         reject(error);
@@ -28,7 +41,6 @@ export class EventosService {
       });
     });
   }
-
   activo(){
     let  url = 'http://127.0.0.1:8000/api/EventoActivo';
     return new Promise ((resolve, reject) => {

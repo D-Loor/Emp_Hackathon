@@ -142,7 +142,7 @@ export class AgregarComponent implements OnInit {
         
         Toast.fire({
           icon: 'info',
-          title: '¡No hay Eventos por el momento..!'
+          title: '¡No hay eventos disponibles por el momento..!'
         })
       }
     }).catch(error =>{

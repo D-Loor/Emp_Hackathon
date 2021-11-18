@@ -19,13 +19,15 @@ export class RegistroComponent implements OnInit {
 
   Datos = [];
   array = [];
-  Gestu = [];
+  Gestu = [];  
+  eventos=[];
   Array_Carrera = [];
   CarreraCon=[];
 
   participantes="";
   carrera;
   cantidad;
+  even;
   carreras;
   totalestu;
   Nrestricciones=0;
@@ -35,8 +37,15 @@ export class RegistroComponent implements OnInit {
   ClsCarrera="form-control";
   ClsParticipantes="form-control";
   ClsCantidad="form-control";
+  ClsEvento="form-control";
 
-  constructor(private evento_service: EventosService, private estudiante_service: EstudiantesService, private carrera_service: CarrerasService, private grupos_service:GruposService) { }
+  constructor(private eventos_service: EventosService, private estudiante_service: EstudiantesService, private carrera_service: CarrerasService, private grupos_service:GruposService) { }
+
+  ngOnInit() {
+    //this.validar();
+    this.cargar_even();
+    this.cargarCarreras();
+  }
 
   cargarCarreras() {
     this.carrera_service.cargar_carreras().then(data =>{
@@ -109,7 +118,7 @@ export class RegistroComponent implements OnInit {
       
       Toast.fire({
         icon: 'error',
-        title: 'Datos Incompletos..!'
+        title: '¡Formulario Incompleto..!'
       })
     }
     else{
@@ -184,11 +193,6 @@ export class RegistroComponent implements OnInit {
     this.CarreraCon.splice(posi, 1);
 
   }
-  ngOnInit() {
-    this.validar();
-    this.cargarCarreras();
-  }
-
   
   guardar(){
 
@@ -262,9 +266,15 @@ export class RegistroComponent implements OnInit {
 
   conformar() {
     
-    if(this.participantes==""||this.participantes==undefined){
+    if(this.participantes==""||this.participantes==undefined || this.even==""||this.even==undefined){
 
-      this.ClsParticipantes=" form-control TxtError";
+      if(this.participantes==""||this.participantes==undefined){
+        this.ClsParticipantes=" form-control TxtError";
+      }
+      if(this.even==""||this.even==undefined){
+        this.ClsEvento=" form-control TxtError";
+      }
+      
       
       const Toast = Swal.mixin({
         toast: true,
@@ -280,16 +290,55 @@ export class RegistroComponent implements OnInit {
       
       Toast.fire({
         icon: 'error',
-        title: 'Datos Incompletos..!'
+        title: '¡Formulario Incompleto..!'
       })
 
     }else{
       
-      this.estudiante_service.cargar_estudiantes().then(data => {
-        this.Datos = data['result'];
-        //console.log(this.Datos);
-        this.agrupar();
-        this.conformado=true;
+      this.estudiante_service.validar_estu_evento(this.even).then(data => {
+        this.Gestu = []; 
+        if(data['code']==201){
+          this.Datos = data['result'];
+          this.agrupar();
+          this.conformado=true;
+        }else if(data['code']==400){
+  
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 4000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+          
+          Toast.fire({
+            icon: 'info',
+            title: '¡Los grupos de este evento ya se encuentran conformados..!'
+          })
+  
+        }else if(data['code']==202){
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+          
+          Toast.fire({
+            icon: 'info',
+            title: '¡No hay estudiantes registrados en este evento..!'
+          })
+        }   
+       
       }).catch(error => {
         console.log(error);
       });
@@ -336,6 +385,8 @@ export class RegistroComponent implements OnInit {
     let Grupos = Math.floor(estuLength / parseInt(this.participantes));
     let carrN=0;
     let GrupoEstudiantes;
+
+      
     //sumar restricciones
     for (let i = 0; i < this.CarreraCon.length; i++) {
         carrN+=this.CarreraCon[i].cantidad;  
@@ -460,8 +511,7 @@ export class RegistroComponent implements OnInit {
       this.array.splice(random, 1);
     }
 
-    console.log(result);
-
+    let Aux = [];
     for (let j = 1; j <= Grupos + 1; j++) {
 
       for (let x = 0; x <= this.CarreraCon.length; x++) {
@@ -473,7 +523,7 @@ export class RegistroComponent implements OnInit {
           }else{
             valor=  this.CarreraCon[x]['cantidad'];
           }
-           
+          
         for (let y = 0; y < valor; y++) {
 
           for (let i = 0; i < result.length; i++) {
@@ -481,12 +531,14 @@ export class RegistroComponent implements OnInit {
             if(result[i]['grupo']==j){
 
               if(pase==true){
-                this.Gestu.push(result[i]);
+                // this.Gestu.push(result[i]);
+                Aux.push(result[i]);
                 result.splice(i, 1);
                 break;
               }
               else if(result[i]['carrera'] === this.CarreraCon[x]['nombre']) {
-                this.Gestu.push(result[i]);
+                // this.Gestu.push(result[i]);
+                 Aux.push(result[i]);
                 result.splice(i, 1);
                 break;
               }
@@ -496,7 +548,67 @@ export class RegistroComponent implements OnInit {
         }
       }
     }
+    this.rellenar(Aux,Grupos);
+  }
 
+  cargar_even(){
+    this.eventos_service.activo().then(data =>{
+      if(data['code']==201){
+        this.eventos=data['result'];
+      }else{
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+        
+        Toast.fire({
+          icon: 'info',
+          title: '¡No hay eventos disponibles por el momento..!'
+        })
+      }
+      
+    }).catch(error =>{
+      console.log(error);
+    });
+  }
+
+  rellenar(estus,ngrupos){
+    debugger
+    for(let j=1; j <= ngrupos+1; j++){
+      let estudiantes=parseInt(this.participantes);
+      for (let i = 0; i < estus.length;) {
+        if(estudiantes > 0){
+          if(estus[i].grupo==j){
+            this.Gestu.push(estus[i]);
+            estus.splice(i, 1);
+            estudiantes--;
+          }else{
+            let dato = {
+              'grupo': j,
+              'id_carrera': estus[estus.length-1]['id_carrera'],
+              'id_estudiante': estus[estus.length-1]['id_estudiante'],
+              'nombres': estus[estus.length-1]['nombres'],
+              'cedula':estus[estus.length-1]['cedula'],
+              'apellidos': estus[estus.length-1]['apellidos'],
+              'carrera': estus[estus.length-1]['carrera']
+            };
+            estudiantes--;
+            this.Gestu.push(dato);
+            estus.splice(estus.length-1, 1);
+          }
+        }else
+          break;
+        
+      }
+    }
+    
   }
 }
 
