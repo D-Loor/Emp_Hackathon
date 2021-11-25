@@ -109,7 +109,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of Gestu">
+              <tr *ngFor="let item of Gestu | paginate: { itemsPerPage: 10, currentPage: p }">
                 <th scope="row">{{item.grupo}}</th>
                 <td>{{item.nombres}} {{item.apellidos}}</td>
                 <td>{{item.cedula}}</td>
@@ -119,6 +119,8 @@
   
             </tbody>
           </table>
+          <pagination-controls *ngIf="Gestu.length!=0" (pageChange)="p = $event"></pagination-controls>
+
         </div>
 
         <div _ngcontent-wql-c3="" class="row m-t-30"></div>

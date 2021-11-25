@@ -45,7 +45,7 @@ class EstudianteController extends Controller
     public function store(Request $request)
     {
         
-        $valida=Estudiante::where('cedula', $request->cedula)->get()->first();
+        $valida=Estudiante::where('cedula', $request->cedula)->where('id_evento', $request->id_evento)->get()->first();
         if( $valida!= null){
             return response()->json(['result'=>"Estudiante ya se encuentra registrado", 'code'=>'400']);
         }else{

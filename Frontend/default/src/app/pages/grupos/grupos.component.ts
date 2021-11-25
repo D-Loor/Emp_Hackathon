@@ -30,6 +30,16 @@ export class GruposComponent implements OnInit {
   ClsEvento="form-control";
   ClsGrupo="form-control";
 
+  spinnerConfig: object = {
+    bdColor: 'rgba(0, 0, 0, 0.8)',
+    size: 'medium',
+    color: '#fff',
+    type: 'square-jelly-box',
+    fullScreen: true,
+    template: null,
+    showSpinner: false
+  };
+
   constructor(private eventos_service:EventosService, private grupos_service:GruposService) { }
 
   ngOnInit() {
@@ -50,6 +60,7 @@ export class GruposComponent implements OnInit {
       denyButtonText: `Cancelar`,
     }).then((result) => {
       if (result.isConfirmed) {
+        
 
         this.grupos_service.eliminar_grupos(this.even).then(data =>{
           if(data['code']==201){
@@ -95,6 +106,7 @@ export class GruposComponent implements OnInit {
           title: '¡Proceso cancelado..!'
         })
       }
+      
     })
     
     
@@ -105,6 +117,7 @@ export class GruposComponent implements OnInit {
   }
 
   cargar(){
+    
     this.Gestu=[];
     this.Grupos=[];
     this.grupos_service.cargar_estu(this.even).then(data =>{
@@ -139,9 +152,11 @@ export class GruposComponent implements OnInit {
     }).catch(error =>{
       console.log(error);
     });
+    
   }
 
   cargar_even(){
+    
     this.eventos_service.activo().then(data =>{
       if(data['code']==201){
         this.eventos=data['result'];
@@ -167,6 +182,7 @@ export class GruposComponent implements OnInit {
     }).catch(error =>{
       console.log(error);
     });
+    
   }
 
   editar(id,grupo,nombres,apellidos,carrera,cedula){
@@ -180,6 +196,7 @@ export class GruposComponent implements OnInit {
   }
 
   eliminarestu(id_grupo,nombres,apellidos,grupo){
+
     Swal.fire({
       title: '¿Desea eliminar a '+nombres+' '+ apellidos+' del grupo '+grupo+'?',
       showDenyButton: true,
@@ -191,7 +208,7 @@ export class GruposComponent implements OnInit {
       denyButtonText: `Cancelar`,
     }).then((result) => {
       if (result.isConfirmed) {
-
+        
         this.grupos_service.eliminar_estudiante_grupo(id_grupo).then(data =>{
           
           if(data['code']==201){
@@ -236,7 +253,7 @@ export class GruposComponent implements OnInit {
         }).catch(error =>{
           console.log(error);
         });
-
+        
       } else if (result.isDenied) {
         const Toast = Swal.mixin({
           toast: true,
@@ -271,6 +288,7 @@ export class GruposComponent implements OnInit {
       denyButtonText: `Cancelar`,
     }).then((result) => {
       if (result.isConfirmed) {
+        
         let dato={
           "id_grupo":this.id_actualizar,
           "grupo":this.grupo
@@ -279,7 +297,7 @@ export class GruposComponent implements OnInit {
         this.grupos_service.actualizar(dato).then(data =>{
           
           if(data['code']==201){
-            
+            this.actualizar=false;
             const Toast = Swal.mixin({
               toast: true,
               position: 'top-end',
@@ -320,7 +338,7 @@ export class GruposComponent implements OnInit {
         }).catch(error =>{
           console.log(error);
         });
-
+        
       } else if (result.isDenied) {
         const Toast = Swal.mixin({
           toast: true,

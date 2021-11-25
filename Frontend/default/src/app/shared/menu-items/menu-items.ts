@@ -81,14 +81,15 @@ const MENUITEMS = [
         name: ' Eventos',
         type: 'link',
         icon: 'ti-cup'
-      },
-      {
-        state: 'historialeventos',
-        short_label: 'H',
-        name: 'Historial de Eventos',
-        type: 'link',
-        icon: 'ti-clipboard'
       }
+      // ,
+      // {
+      //   state: 'historialeventos',
+      //   short_label: 'H',
+      //   name: 'Historial de Eventos',
+      //   type: 'link',
+      //   icon: 'ti-clipboard'
+      // }
     ]
   },
 

@@ -5,6 +5,7 @@ import { GruposRoutingModule } from './grupos-routing.module';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
 import { GruposComponent } from './grupos.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { GruposComponent } from './grupos.component';
     CommonModule,
     GruposRoutingModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    NgxPaginationModule
   ]
 })
 export class GruposModule { }

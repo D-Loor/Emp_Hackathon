@@ -347,7 +347,7 @@ export class RegistroComponent implements OnInit {
   }
 
   validar(){
-    this.grupos_service.cargar_grupos().then(data =>{
+    this.grupos_service.cargar_estu(this.even).then(data =>{
       if(data['code']==201){
         this.creados=true;
 

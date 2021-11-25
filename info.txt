@@ -9,9 +9,12 @@ rgb(138, 138, 138) -- Texto, Cuarto
 rgb(255, 255, 255)  --Tercero
 rgb(241, 241, 241)  --Quinto
 
-Green Hackathon Agrotech
-Dos puntos al final de datos register.
-Después de registrase mostrar mmensaje Gracias por part..
-La foto debe tener relación con Agro y Tecnología
-Fondo de la ESPAM en el login
-Login sacar el gracias y poner el nombre del evento completo
+--Backend
+composer require barryvdh/laravel-dompdf
+
+
+--Frontend
+npm install sweetalert2
+npm install ngx-spinner --save
+npm install ngx-pagination --save
+

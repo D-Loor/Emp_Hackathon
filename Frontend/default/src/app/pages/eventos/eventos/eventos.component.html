@@ -66,7 +66,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let item of array_eventos " >
+                  <tr *ngFor="let item of array_eventos | paginate: { itemsPerPage: 10, currentPage: p } " >
                     <td>{{item.evento}}</td>
                     <td class="text-center">{{item.fecha_inicio}}</td>
                     <td class="text-center">{{item.fecha_fin}}</td>
@@ -80,6 +80,8 @@
               
                 </tbody>
               </table>
+              <pagination-controls *ngIf="array_eventos.length!=0" (pageChange)="p = $event"></pagination-controls>
+
             </div>
           </div>
         </app-card>

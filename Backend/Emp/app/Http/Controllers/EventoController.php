@@ -14,7 +14,7 @@ class EventoController extends Controller
      */
     public function index()
     {
-        $datos=Evento::all();
+        $datos=Evento::orderBy('fecha_inicio', 'ASC')->get();
         $num_rows = count($datos);
 
         if($num_rows!=0){

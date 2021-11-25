@@ -5,6 +5,7 @@ import { RegistroComponent } from './registro.component';
 import {SharedModule} from '../../shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { OrdenarPipe } from '../../pipes/ordenar/ordenar.pipe';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { OrdenarPipe } from '../../pipes/ordenar/ordenar.pipe';
     CommonModule,
     RegistroRoutingModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    NgxPaginationModule
     ],
   declarations: [RegistroComponent,OrdenarPipe]
 })

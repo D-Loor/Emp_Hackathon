@@ -28,19 +28,19 @@
           <div class="subtext">Para registarte debes completar los siguientes datos:</div>
           <form action="" >
             <div class="input-wrap">
-              <input type="text" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57' autocomplete="off" required name="cedula" id="cedula" [(ngModel)]="cedula" [class]="ClsCedula" (change)="ClsCedula=''"  (blur)="validarC()"/>
+              <input [disabled]='!eventoa' type="text" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57' autocomplete="off" required name="cedula" id="cedula" [(ngModel)]="cedula" [class]="ClsCedula" (change)="ClsCedula=''"  (blur)="validarC()"/>
               <label for="ci">Cédula</label>
             </div>
             <div class="input-wrap">
-              <input type="text" autocomplete="off" required name="nombres" id="nombres" [(ngModel)]="nombres" [class]="ClsNombres" (change)="ClsNombres=''" />
+              <input [disabled]='!eventoa' type="text" autocomplete="off" required name="nombres" id="nombres" [(ngModel)]="nombres" [class]="ClsNombres" (change)="ClsNombres=''" />
               <label for="nombres">Nombres</label>
             </div>
             <div class="input-wrap">
-              <input type="text" autocomplete="off" required name="apellidos" id="apellidos" [(ngModel)]="apellidos" [class]="ClsApellidos" (change)="ClsApellidos=''" />
+              <input [disabled]='!eventoa' type="text" autocomplete="off" required name="apellidos" id="apellidos" [(ngModel)]="apellidos" [class]="ClsApellidos" (change)="ClsApellidos=''" />
               <label for="apellidos">Apellidos</label>
             </div>
             <div class="input-wrap">
-              <select id="country" name="carrera" id="carrera" [(ngModel)]="carrera" required [class]="ClsCarrera" (change)="ClsCarrera=''" >
+              <select [disabled]='!eventoa' id="country" name="carrera" id="carrera" [(ngModel)]="carrera" required [class]="ClsCarrera" (change)="ClsCarrera=''" >
                 <option *ngFor="let item of Array_Carrera" value="{{item.id_carrera}}">{{item.nombre}}</option>
               </select>
               <label for="ci">Carrera</label>
