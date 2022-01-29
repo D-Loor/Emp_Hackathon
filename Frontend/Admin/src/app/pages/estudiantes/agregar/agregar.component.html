@@ -1,0 +1,66 @@
+<div class="row">
+    <div class="col-sm-12">
+      <app-card [title]="'Registro de Estudiantes'" [classHeader]="true" [blockClass]="'table-border-style'">
+        <span class="code-header">Complete los siguientes datos para registrar un estudiante:</span>
+  
+        <div _ngcontent-wql-c3="" class="auth-box contenido1">
+         
+          <div class="row">
+  
+            <label _ngcontent-qfj-c2="" class="col-5 col-sm-2 col-form-label" for="example-text-input">Cédula</label>
+            <div _ngcontent-qfj-c2="" class="col-7 col-sm-4 divisor">
+              <input _ngcontent-qfj-c2="" [class]="ClsCedula" autocomplete="off"  (change)="ClsCedula='form-control'; validarC()" onkeypress='return event.charCode >= 48 && event.charCode <= 57' maxlength="10"
+              name="cedula" id="cedula" [(ngModel)]="cedula" placeholder="Ingrese la cédula" type="text">
+            </div>
+
+            <label _ngcontent-qfj-c2="" class="col-5 col-sm-2 col-form-label " for="example-text-input">Evento</label>
+            <div _ngcontent-qfj-c2="" class="col-7 col-sm-4 divisor">
+                <select id="evento" name="evento" [disabled]="array_eventos.length==0" id="evento" [(ngModel)]="evento" required [class]="ClsEvento" (change)="ClsEvento='form-control'; valGrupos();grupo='0';" >
+                <option *ngFor="let item of array_eventos" value="{{item.id_evento}}">{{item.evento}}</option>
+                </select>              
+            </div>
+
+            <label _ngcontent-qfj-c2="" class="col-5 col-sm-2 col-form-label" for="example-text-input">Nombres</label>
+            <div _ngcontent-qfj-c2="" class="col-7 col-sm-4 divisor">
+            <input _ngcontent-qfj-c2="" [class]="ClsNombres" autocomplete="off" (change)="ClsNombres='form-control'"  
+            name="nombres" id="nombres" [(ngModel)]="nombres" placeholder="Ingrese los nombres" type="text">
+            </div>
+
+            <label _ngcontent-qfj-c2="" class="col-5 col-sm-2 col-form-label" for="example-text-input">Apellidos</label>
+            <div _ngcontent-qfj-c2="" class="col-7 col-sm-4 divisor">
+            <input _ngcontent-qfj-c2="" [class]="ClsApellidos" autocomplete="off" (change)="ClsApellidos='form-control'"  
+            name="apellidos" id="apellidos" [(ngModel)]="apellidos" placeholder="Ingrese los apellidos" type="text">
+            </div>
+          
+            <label _ngcontent-qfj-c2="" class="col-5 col-sm-2 col-form-label " for="example-text-input">Carrera</label>
+            <div _ngcontent-qfj-c2="" class="col-7 col-sm-4 divisor">
+                <select id="carrera" name="carrera" id="carrera" [(ngModel)]="carrera" required [class]="ClsCarrera" (change)="ClsCarrera='form-control'" >
+                <option *ngFor="let item of array_carreras"  value="{{item.id_carrera}}">{{item.nombre}}</option>
+                </select>              
+            </div>
+
+            <label *ngIf="valgurpo" _ngcontent-qfj-c2="" class="col-5 col-sm-2 col-form-label " for="example-text-input">Grupo</label>
+            <div *ngIf="valgurpo" _ngcontent-qfj-c2="" class="col-7 col-sm-4 divisor">
+                <select id="grupo" name="grupo" id="grupo" [(ngModel)]="grupo" required [class]="ClsGrupo" (change)="ClsGrupo='form-control'" >
+                <option  *ngFor="let item of array_grupos" value="{{item}}" >{{item}}</option>
+                </select>              
+            </div>
+
+            <div _ngcontent-wql-c3="" class="auth-box contenido3 col-sm-12">
+                <button _ngcontent-qfj-c5="" *ngIf="eventoa && !invalido"  (click)="Registrar()"  class="btn btn-success boton"><i _ngcontent-qfj-c5="" class="icofont icofont-ui-add"></i>Registrar Estudiante</button>
+                <button _ngcontent-qfj-c5="" *ngIf="!eventoa || invalido"  class="btn btn-success boton disabled"><i _ngcontent-qfj-c5="" class="icofont icofont-ui-add"></i>Registrar Estudiante</button>
+            </div>
+
+              
+          </div>
+                  
+         
+        </div>
+  
+       
+       
+  
+      </app-card>
+  
+    </div>
+  </div>

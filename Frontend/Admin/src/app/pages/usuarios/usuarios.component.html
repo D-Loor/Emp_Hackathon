@@ -1,0 +1,79 @@
+<div class="row">
+    <div class="col-sm-12">
+      
+        <app-card [title]="'Registro de Eventos'" [classHeader]="true" [blockClass]="'table-border-style'">
+            <span class="code-header">Complete los siguientes datos para registrar un usuario:</span>
+      
+            <div _ngcontent-wql-c3="" class="auth-box contenido1">
+             
+              <div class="row">
+      
+                <label _ngcontent-qfj-c2="" class="col-5 col-sm-3 col-form-label" for="example-text-input">Nombres completos</label>
+                <div _ngcontent-qfj-c2="" class="col-7 col-sm-9 divisor">
+                  <input _ngcontent-qfj-c2="" [class]="ClsNombre" autocomplete="off"  (change)="ClsNombre='form-control'" 
+                  name="nombres" id="nombres" [(ngModel)]="nombres" placeholder="Ingrese los nombres completos" type="text">
+                </div>
+
+                <label _ngcontent-qfj-c2="" class="col-5 col-sm-2 col-form-label" for="example-text-input">Correo</label>
+                <div _ngcontent-qfj-c2="" class="col-7 col-sm-4 divisor">
+                <input _ngcontent-qfj-c2=""  [class]="ClsCorreo" autocomplete="off" (change)="ClsCorreo='form-control'"  
+                name="correo" id="correo" [(ngModel)]="correo"  type="email" placeholder="Ingrese correo">
+                </div>
+
+                <label _ngcontent-qfj-c2="" class="col-5 col-sm-2 col-form-label" for="example-text-input">Contraseña</label>
+                <div _ngcontent-qfj-c2="" class="col-7 col-sm-4 divisor">
+                <input _ngcontent-qfj-c2=""  [class]="ClsPass" autocomplete="off" (change)="ClsPass='form-control'"  
+                name="password" id="password" [(ngModel)]="password" placeholder="Ingrese contraseña" type="text">
+                </div>
+
+                <div _ngcontent-wql-c3="" *ngIf="actualiza" class="auth-box contenido3 col-sm-12">
+                  <button _ngcontent-qfj-c5=""  (click)="limpiar()"  class="btn btn-warning boton"><i _ngcontent-qfj-c5="" class="icofont icofont-ui-add"></i>Nuevo Usuario</button>  
+                  <button _ngcontent-qfj-c5=""  (click)="actualizar()"  class="btn btn-success boton"><i _ngcontent-qfj-c5="" class="icofont icofont-refresh"></i>Actualizar Usuario</button>
+                </div>
+
+                <div _ngcontent-wql-c3="" *ngIf="!actualiza" class="auth-box contenido3 col-sm-12">
+                    <button _ngcontent-qfj-c5=""  (click)="registrar()"  class="btn btn-success boton"><i _ngcontent-qfj-c5="" class="icofont icofont-ui-add"></i>Registrar Usuario</button>
+                </div>
+    
+                  
+              </div>
+                      
+             
+            </div>
+      
+        </app-card>
+
+        <app-card [title]="'Usuarios Registrados'" [classHeader]="true" [blockClass]="'table-border-style'">
+          <span class="code-header">Información de los eventos registrados.</span>
+          <div _ngcontent-wql-c3="" class="auth-box contenedor">                 
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                <tr class="text-center">
+                  <th>Nombres</th>
+                  <th>Correo</th>
+                  <th>Rol</th>
+                  <th>Opciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of array_usuarios | paginate: { itemsPerPage: 10, currentPage: p } " >
+                    <td>{{item.nombres}}</td>
+                    <td class="text-center">{{item.correo}}</td>
+                    <td class="text-center">{{item.rol}}</td>
+                    <td class="text-center">
+                        <button _ngcontent-acp-c8="" (click)="editar(item.id_usuario,item.nombres,item.correo,item.password)" class="btn btn-success btn-outline-success btn-icon botonedi"><i _ngcontent-acp-c8="" class="icofont icofont-pencil-alt-5 icono"></i></button>
+                        <button _ngcontent-acp-c8="" *ngIf="item.rol != 'Administrador'" (click)="eliminar(item.id_usuario,item.nombres)" class="btn btn-warning btn-outline-warning btn-icon botonedi"><i _ngcontent-acp-c8="" class="icofont icofont-trash icono"></i></button>                        
+                    </td>  
+                  </tr>
+              
+                </tbody>
+              </table>
+              <pagination-controls *ngIf="array_usuarios.length!=0" (pageChange)="p = $event"></pagination-controls>
+
+            </div>
+          </div>
+        </app-card>
+      
+    </div>
+  </div>

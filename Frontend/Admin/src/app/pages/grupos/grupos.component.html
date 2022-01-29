@@ -1,0 +1,144 @@
+<div class="row">
+  <div class="col-sm-12">
+
+    <app-card [title]="'Editar grupo del Estudiante'" *ngIf="actualizar" [classHeader]="true"
+      [blockClass]="'table-border-style'">
+      <span class="code-header">Seleccione el grupo al que desea cambiar al estudiante:</span>
+
+      <div _ngcontent-wql-c3="" class="auth-box contenido1">
+
+        <div class="row">
+
+          <label _ngcontent-qfj-c2="" class="col-5 col-sm-2 col-form-label" for="example-text-input">Nombres</label>
+          <div _ngcontent-qfj-c2="" class="col-7 col-sm-10 divisor">
+            <input _ngcontent-qfj-c2="" class="form-control" disabled name="nombres" id="nombres" [(ngModel)]="nombres"
+              type="text">
+          </div>
+
+          <label _ngcontent-qfj-c2="" class="col-5 col-sm-2 col-form-label" for="example-text-input">Cédula</label>
+          <div _ngcontent-qfj-c2="" class="col-7 col-sm-4 divisor">
+            <input _ngcontent-qfj-c2="" class="form-control" disabled name="cedula" id="cedula" [(ngModel)]="cedula"
+              placeholder="Ingrese la cédula" type="text">
+          </div>
+
+          <label _ngcontent-qfj-c2="" class="col-5 col-sm-2 col-form-label " for="example-text-input">Carrera</label>
+          <div _ngcontent-qfj-c2="" class="col-7 col-sm-4 divisor">
+            <input _ngcontent-qfj-c2="" class="form-control" disabled name="carrera" id="carrera" [(ngModel)]="carrera"
+              type="text">
+          </div>
+
+          <label _ngcontent-qfj-c2="" class="col-5 col-sm-2 col-form-label " for="example-text-input">Grupo</label>
+          <div _ngcontent-qfj-c2="" class="col-7 col-sm-4 divisor">
+            <select id="grupo" name="grupo" id="grupo" [(ngModel)]="grupo" required [class]="ClsGrupo"
+              (change)="ClsGrupo='form-control'">
+              <option *ngFor="let item of Grupos" value="{{item}}">{{item}}</option>
+            </select>
+          </div>
+
+          <div _ngcontent-wql-c3="" class="auth-box contenido3 col-sm-6">
+
+            <button _ngcontent-qfj-c5="" *ngIf="grupo_actualizar != grupo" (click)="Actualizar()"
+              class="btn btn-success boton"><i _ngcontent-qfj-c5="" class="icofont icofont-refresh"></i>Actualizar
+              Estudiante</button>
+            <button _ngcontent-qfj-c5="" *ngIf="grupo_actualizar == grupo" class="btn btn-success boton disabled"><i
+                _ngcontent-qfj-c5="" class="icofont icofont-refresh"></i>Actualizar Estudiante</button>
+            <button _ngcontent-qfj-c5="" (click)="actualizar=false" class="btn cancel boton espacio bot"><i
+                _ngcontent-qfj-c5="" class="icofont icofont-error"></i>Cancelar</button>
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+    </app-card>
+
+
+    <app-card [title]="'Grupos Conformados'" [classHeader]="true" [blockClass]="'table-border-style'">
+      <span class="code-header">Datos de los Participantes y Grupo al que pertenecen.</span>
+      <div _ngcontent-wql-c3="" class="auth-box contenedor">
+        <div class="row">
+
+          <label _ngcontent-qfj-c2="" class="col-4 col-sm-2 col-form-label" for="example-text-input">Evento</label>
+          <div _ngcontent-qfj-c2="" class="col-8 col-sm-4 botones">
+            <select id="even" [disabled]='eventos.length==0' name="even" id="even" [(ngModel)]="even" required
+              [class]="ClsEvento" (change)="cargar(); actualizar=false;">
+              <option *ngFor="let item of eventos" value="{{item.id_evento}}">{{item.evento}}</option>
+            </select>
+          </div>
+
+         
+
+            <div class=" col-6 col-sm-3 ">
+              <button _ngcontent-qfj-c5="" disabled *ngIf="even==null || !gconf"
+                class="btn dere btn-success  disabled bot"><i _ngcontent-qfj-c5=""
+                  class="icofont icofont-file-pdf"></i>Generar PDF</button>
+              <button _ngcontent-qfj-c5="" (click)="reporte()" *ngIf="even!=null && gconf"
+                class="btn btn-success dere bot"><i _ngcontent-qfj-c5="" class="icofont icofont-file-pdf"></i>Generar
+                PDF</button>
+            </div>
+            <div class="col-6 col-sm-3">
+              <button _ngcontent-qfj-c5="" disabled *ngIf="even==null || !gconf" class="btn btn-warning disabled bot"><i
+                  _ngcontent-qfj-c5="" class="icofont icofont-trash"></i>Eliminar Grupos</button>
+              <button _ngcontent-qfj-c5="" (click)="eliminar()" *ngIf="even!=null && gconf"
+                class="btn btn-warning bot"><i _ngcontent-qfj-c5="" class="icofont icofont-trash"></i>Eliminar
+                Grupos</button>
+            </div>
+          
+
+
+
+        </div>
+
+
+
+        <div class="botones">
+        </div>
+
+
+
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr class="text-center">
+                <th>Grupo</th>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Cédula</th>
+                <th>Carrera</th>
+                <th>Opciones</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of Gestu | paginate: { itemsPerPage: 10, currentPage: p } ">
+                <th scope="row" class="text-center">{{item.grupo}}</th>
+                <td>{{item.nombres}}</td>
+                <td>{{item.apellidos}}</td>
+                <td>{{item.cedula}}</td>
+                <td>{{item.nombre}}</td>
+                <td class="text-center">
+                  <button _ngcontent-acp-c8=""
+                    (click)="editar(item.id_grupo,item.grupo,item.nombres,item.apellidos,item.nombre,item.cedula)"
+                    class="btn btn-success btn-outline-success btn-icon botonedi"><i _ngcontent-acp-c8=""
+                      class="icofont icofont-pencil-alt-5 icono"></i></button>
+                  <button _ngcontent-acp-c8=""
+                    (click)="eliminarestu(item.id_grupo,item.nombres,item.apellidos,item.grupo)"
+                    class="btn btn-warning btn-outline-warning btn-icon botonedi"><i _ngcontent-acp-c8=""
+                      class="icofont icofont-trash icono"></i></button>
+                </td>
+
+              </tr>
+
+            </tbody>
+          </table>
+          <pagination-controls *ngIf="Gestu.length!=0" (pageChange)="p = $event"></pagination-controls>
+
+        </div>
+      </div>
+    </app-card>
+
+
+  </div>
+</div>
