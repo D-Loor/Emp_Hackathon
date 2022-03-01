@@ -32,44 +32,20 @@ export interface Menu {
   const MENUITEMS = [
   
     {
-      label: 'Grupos',
+      label: 'Usuarios',
       main: [
+
         {
-          state: 'generargrupos',
-          short_label: 'G',
-          name: 'Conformar Grupos ',
+          state: 'usuarios',
+          short_label: 'U',
+          name: 'Usuarios',
           type: 'link',
-          icon: 'ti-check-box'
-        },
-        {
-          state: 'mostrargrupos',
-          short_label: 'M',
-          name: 'Mostrar Grupos',
-          type: 'link',
-          icon: 'ti-clipboard'
-        }
-      ]
-    },
-    {
-      label: 'Estudiantes',
-      main: [
+          icon: 'ti-id-badge'
+        }      
         
-        {
-          state: 'estudiantes',
-          short_label: 'E',
-          name: 'Agregar Estudiante',
-          type: 'link',
-          icon: 'ti-user'
-        },
-        {
-          state: 'mostrarestudiantes',
-          short_label: 'H',
-          name: 'Mostrar Estudiantes',
-          type: 'link',
-          icon: 'ti-clipboard'
-        }
       ]
     },
+    
     {
       label: 'Eventos',
       main: [
@@ -92,17 +68,43 @@ export interface Menu {
       ]
     },
     {
-      label: 'Usuarios',
+      label: 'Estudiantes',
       main: [
-
-        {
-          state: 'usuarios',
-          short_label: 'U',
-          name: 'Usuarios',
-          type: 'link',
-          icon: 'ti-id-badge'
-        }      
         
+        {
+          state: 'estudiantes',
+          short_label: 'E',
+          name: 'Agregar Estudiante',
+          type: 'link',
+          icon: 'ti-user'
+        },
+        {
+          state: 'mostrarestudiantes',
+          short_label: 'H',
+          name: 'Mostrar Estudiantes',
+          type: 'link',
+          icon: 'ti-clipboard'
+        }
+      ]
+    },
+   
+    {
+      label: 'Grupos',
+      main: [
+        {
+          state: 'generargrupos',
+          short_label: 'G',
+          name: 'Conformar Grupos ',
+          type: 'link',
+          icon: 'ti-check-box'
+        },
+        {
+          state: 'mostrargrupos',
+          short_label: 'M',
+          name: 'Mostrar Grupos',
+          type: 'link',
+          icon: 'ti-clipboard'
+        }
       ]
     },
     {
@@ -127,24 +129,27 @@ export interface Menu {
   const MENUITEMS2 = [
   
     {
-      label: 'Grupos',
+      label: 'Eventos',
       main: [
+        
         {
-          state: 'generargrupos',
-          short_label: 'G',
-          name: 'Conformar Grupos ',
+          state: 'eventos',
+          short_label: 'E',
+          name: ' Eventos',
           type: 'link',
-          icon: 'ti-check-box'
-        },
-        {
-          state: 'mostrargrupos',
-          short_label: 'M',
-          name: 'Mostrar Grupos',
-          type: 'link',
-          icon: 'ti-clipboard'
+          icon: 'ti-cup'
         }
+        // ,
+        // {
+        //   state: 'historialeventos',
+        //   short_label: 'H',
+        //   name: 'Historial de Eventos',
+        //   type: 'link',
+        //   icon: 'ti-clipboard'
+        // }
       ]
     },
+   
     {
       label: 'Estudiantes',
       main: [
@@ -166,26 +171,25 @@ export interface Menu {
       ]
     },
     {
-      label: 'Eventos',
+      label: 'Grupos',
       main: [
-        
         {
-          state: 'eventos',
-          short_label: 'E',
-          name: ' Eventos',
+          state: 'generargrupos',
+          short_label: 'G',
+          name: 'Conformar Grupos ',
           type: 'link',
-          icon: 'ti-cup'
+          icon: 'ti-check-box'
+        },
+        {
+          state: 'mostrargrupos',
+          short_label: 'M',
+          name: 'Mostrar Grupos',
+          type: 'link',
+          icon: 'ti-clipboard'
         }
-        // ,
-        // {
-        //   state: 'historialeventos',
-        //   short_label: 'H',
-        //   name: 'Historial de Eventos',
-        //   type: 'link',
-        //   icon: 'ti-clipboard'
-        // }
       ]
     },
+    
     {
       label: 'Registro',
       main: [

@@ -398,7 +398,6 @@ export class RegistroComponent implements OnInit {
     let Grupos = Math.floor(estuLength / parseInt(this.participantes));
     let carrN=0;
     let GrupoEstudiantes;
-
       
     //sumar restricciones
     for (let i = 0; i < this.CarreraCon.length; i++) {
@@ -437,6 +436,7 @@ export class RegistroComponent implements OnInit {
 
           result.push(dato);
         } else {
+          
           //recorrer por grupos
           for (let j = 1; j <= Grupos + 1; j++) {
 
@@ -498,7 +498,6 @@ export class RegistroComponent implements OnInit {
               }
             }
             
-
             //validar condición de n° de carreras y n° de participantes
             if (Cnormales >=0 && pase==true &&GrupoEstudiantes<this.participantes) {
 
@@ -514,7 +513,7 @@ export class RegistroComponent implements OnInit {
 
               result.push(dato);
               break;
-            }else if(i<=estuLength && j==Grupos){
+            }else if(i<=estuLength && j==Grupos+1){
               Grupos++;
             }
           }
@@ -593,7 +592,7 @@ export class RegistroComponent implements OnInit {
   }
 
   rellenar(estus,ngrupos){
-    debugger
+    
     for(let j=1; j <= ngrupos+1; j++){
       let estudiantes=parseInt(this.participantes);
       for (let i = 0; i < estus.length;) {
