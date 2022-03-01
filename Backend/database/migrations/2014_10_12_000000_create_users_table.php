@@ -23,9 +23,9 @@ class CreateUsersTable extends Migration
 
         DB::table("usuarios")
         ->insert([
-            "nombres" => "Diego Loor",
-            "correo" => "diego.loor@espam.edu.ec",
-            "password" => "123",
+            "nombres" => "Administrador",
+            "correo" => "admin@espam.edu.ec",
+            "password" => "admin",
             "rol" => "Administrador",
         ]);
     }
