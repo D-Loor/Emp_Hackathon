@@ -457,7 +457,9 @@ em{
 
 /*------------------------------------------MENTORES-----------------------------------------*/
 
-
+.carreraM{
+	font-size: 13px;
+}
 
 #team h6{
     color: rgb(78 161 117 / 92%);
@@ -472,7 +474,8 @@ em{
 }
 
 .txtpr{
-    font-size: 15px;
+    font-size: 12px;
+	text-align: center;
 }
 
 
@@ -566,7 +569,10 @@ em{
 
 /*------------------------------------------ PREMIOS-----------------------------------------*/
 
-
+#premios{
+	padding-bottom: 10px;
+	padding-top: 64px;
+}
 
 figure.snip0078 {
   font-family: "Raleway", Arial, sans-serif;
@@ -1119,4 +1125,12 @@ body, ul, li {
 	padding-bottom: 12px;
 	line-height: 3;
 }
-  
+
+#inscribirse{
+	padding: 35px 0px !important;
+	margin-bottom: 15px;
+}
+
+.botonInscribirse{
+	margin: 0px !important;
+}
