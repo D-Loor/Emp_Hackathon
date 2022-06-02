@@ -11,7 +11,7 @@ export class EstudiantesService {
 
 
   registrar(data:any){
-    let  url = 'http://127.0.0.1:8000/api/Estudiante';
+    let  url = 'https://app-hackathon-espam.herokuapp.com/api/Estudiante';
     return new Promise ((resolve, reject) => {
       this.http.post(url,data).subscribe(res => {
         resolve(res);
@@ -21,7 +21,7 @@ export class EstudiantesService {
     });
   }
   cargar_estudiantes() {
-    let  url = 'http://127.0.0.1:8000/api/Estudiante';
+    let  url = 'https://app-hackathon-espam.herokuapp.com/api/Estudiante';
     return new Promise ((resolve, reject) => {
       this.http.get(url).subscribe(res => {
         resolve(res);
@@ -31,7 +31,7 @@ export class EstudiantesService {
     });
   }
   validar_estu_evento(evento) {
-    let  url = 'http://127.0.0.1:8000/api/ValEstudiante/'+evento;
+    let  url = 'https://app-hackathon-espam.herokuapp.com/api/ValEstudiante/'+evento;
     return new Promise ((resolve, reject) => {
       this.http.get(url).subscribe(res => {
         resolve(res);
@@ -42,7 +42,7 @@ export class EstudiantesService {
   }
 
   cargar_estu_evento(evento) {
-    let  url = 'http://127.0.0.1:8000/api/Estudiante/'+evento;
+    let  url = 'https://app-hackathon-espam.herokuapp.com/api/Estudiante/'+evento;
     return new Promise ((resolve, reject) => {
       this.http.get(url).subscribe(res => {
         resolve(res);
@@ -53,7 +53,7 @@ export class EstudiantesService {
   }
 
   eliminar_estudiante(id) {
-    let  url = 'http://127.0.0.1:8000/api/Estudiante/'+id;
+    let  url = 'https://app-hackathon-espam.herokuapp.com/api/Estudiante/'+id;
     return new Promise ((resolve, reject) => {
       this.http.delete(url).subscribe(res => {
         resolve(res);

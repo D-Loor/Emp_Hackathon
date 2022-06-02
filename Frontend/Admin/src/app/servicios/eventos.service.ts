@@ -12,7 +12,7 @@ export class EventosService {
   constructor(private http:HttpClient) { }
 
   registrar(data:any){
-    let  url = 'http://127.0.0.1:8000/api/Evento';
+    let  url = 'https://app-hackathon-espam.herokuapp.com/api/Evento';
 
     var formData = new FormData();
     formData.append('evento', data.evento);
@@ -30,7 +30,7 @@ export class EventosService {
     });
   }
   actualizar(data:any){
-    let  url = 'http://127.0.0.1:8000/api/actualizarEvento';
+    let  url = 'https://app-hackathon-espam.herokuapp.com/api/actualizarEvento';
     var formData = new FormData();
     formData.append('id_evento', data.id_evento);
     formData.append('evento', data.evento);
@@ -48,7 +48,7 @@ export class EventosService {
     });
   }
   cargar() {
-    let  url = 'http://127.0.0.1:8000/api/Evento';
+    let  url = 'https://app-hackathon-espam.herokuapp.com/api/Evento';
     return new Promise ((resolve, reject) => {
       this.http.get(url).subscribe(res => {
         resolve(res);
@@ -58,7 +58,7 @@ export class EventosService {
     });
   }
   activo(){
-    let  url = 'http://127.0.0.1:8000/api/EventoActivo';
+    let  url = 'https://app-hackathon-espam.herokuapp.com/api/EventoActivo';
     return new Promise ((resolve, reject) => {
       this.http.get(url).subscribe(res => {
         resolve(res);
@@ -69,7 +69,7 @@ export class EventosService {
   }
 
   eliminar(id) {
-    let  url = 'http://127.0.0.1:8000/api/Evento/'+id;
+    let  url = 'https://app-hackathon-espam.herokuapp.com/api/Evento/'+id;
     return new Promise ((resolve, reject) => {
       this.http.delete(url).subscribe(res => {
         resolve(res);
