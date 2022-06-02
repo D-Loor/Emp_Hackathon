@@ -18,7 +18,7 @@ export class EventosComponent implements OnInit {
   fecha_fin= new Date();
   id_editar="";
   actualizar=false;
-  
+  p:any;
 
   today = new Date();
   fechaActual:string;
