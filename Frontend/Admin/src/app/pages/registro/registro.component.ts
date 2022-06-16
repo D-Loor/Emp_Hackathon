@@ -16,7 +16,7 @@ export class RegistroComponent implements OnInit {
   guardado=false;
   creados=false;
   ValR=false;
-
+p:any;
   Datos = [];
   array = [];
   Gestu = [];  
@@ -24,7 +24,7 @@ export class RegistroComponent implements OnInit {
   Array_Carrera = [];
   CarreraCon=[];
 
-  participantes="";
+  participantes:any="";
   carrera;
   cantidad;
   even;

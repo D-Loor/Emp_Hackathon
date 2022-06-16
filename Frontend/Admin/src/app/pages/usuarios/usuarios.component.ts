@@ -15,7 +15,7 @@ export class UsuariosComponent implements OnInit {
   password;
   actualiza=false;
   idactualizar;
-
+p:any;
   ClsNombre='form-control';
   ClsCorreo='form-control';
   ClsPass='form-control';

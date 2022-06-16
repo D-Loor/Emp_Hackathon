@@ -12,7 +12,7 @@ export class GruposComponent implements OnInit {
   Gestu=[];
   eventos=[];
   Grupos=[];
-
+p:any;
   nombres="";
   cedula="";
   evento="";

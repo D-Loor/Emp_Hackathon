@@ -15,7 +15,7 @@ export class MostrarComponent implements OnInit {
   estudiantes=[];
   eventos=[];
   
-
+p:any;
   ClsEvento="form-control";
   constructor(private estudiantes_service:EstudiantesService,private eventos_service:EventosService) { }
 

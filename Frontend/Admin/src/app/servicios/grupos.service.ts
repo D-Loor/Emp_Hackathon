@@ -9,7 +9,7 @@ export class GruposService {
   constructor(private http:HttpClient) { }
 
   registrar(data:any){
-    let  url = 'http://127.0.0.1:8000/api/Grupo';
+    let  url = 'https://app-hackathon-espam.herokuapp.com/api/Grupo';
     return new Promise ((resolve, reject) => {
       this.http.post(url,data).subscribe(res => {
         resolve(res);{
@@ -22,7 +22,7 @@ export class GruposService {
   }
  
   cargar_estu(id) {
-    let  url = 'http://127.0.0.1:8000/api/Grupo/'+id;
+    let  url = 'https://app-hackathon-espam.herokuapp.com/api/Grupo/'+id;
     return new Promise ((resolve, reject) => {
       this.http.get(url).subscribe(res => {
         resolve(res);
@@ -33,7 +33,7 @@ export class GruposService {
   }
 
    eliminar_estudiante_grupo(id) {
-    let  url = 'http://127.0.0.1:8000/api/Grupo/'+id;
+    let  url = 'https://app-hackathon-espam.herokuapp.com/api/Grupo/'+id;
     return new Promise ((resolve, reject) => {
       this.http.delete(url).subscribe(res => {
         resolve(res);
@@ -44,7 +44,7 @@ export class GruposService {
   }
 
   eliminar_grupos(id) {
-    let  url = 'http://127.0.0.1:8000/api/GrupoEli/'+id;
+    let  url = 'https://app-hackathon-espam.herokuapp.com/api/GrupoEli/'+id;
     return new Promise ((resolve, reject) => {
       this.http.delete(url).subscribe(res => {
         resolve(res);
@@ -55,7 +55,7 @@ export class GruposService {
   }
 
   actualizar(data:any){
-    let  url = 'http://127.0.0.1:8000/api/GrupoActualizar';
+    let  url = 'https://app-hackathon-espam.herokuapp.com/api/GrupoActualizar';
     return new Promise ((resolve, reject) => {
       this.http.put(url,data).subscribe(res => {
         resolve(res);{
@@ -68,7 +68,7 @@ export class GruposService {
   }
   
   validar_grupos(id) {
-    let  url = 'http://127.0.0.1:8000/api/ValidarGrupos/'+id;
+    let  url = 'https://app-hackathon-espam.herokuapp.com/api/ValidarGrupos/'+id;
     return new Promise ((resolve, reject) => {
       this.http.get(url).subscribe(res => {
         resolve(res);

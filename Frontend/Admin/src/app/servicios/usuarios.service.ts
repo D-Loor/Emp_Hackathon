@@ -9,7 +9,7 @@ export class UsuariosService {
   constructor(private http:HttpClient) { }
 
   autentificar(correo,pass){
-    let  url = 'http://127.0.0.1:8000/api/ValidarUsuario/'+correo+'/'+pass;
+    let  url = 'https://app-hackathon-espam.herokuapp.com/api/ValidarUsuario/'+correo+'/'+pass;
     return new Promise ((resolve, reject) => {
       this.http.get(url).subscribe(res => {
         resolve(res);
@@ -19,7 +19,7 @@ export class UsuariosService {
     });
   }
   registrar(data:any){
-    let  url = 'http://127.0.0.1:8000/api/IngresarUsuario';
+    let  url = 'https://app-hackathon-espam.herokuapp.com/api/IngresarUsuario';
     return new Promise ((resolve, reject) => {
       this.http.post(url,data).subscribe(res => {
         resolve(res);{
@@ -31,7 +31,7 @@ export class UsuariosService {
     });
   }
   cargar() {
-    let  url = 'http://127.0.0.1:8000/api/MostrarUsuarios';
+    let  url = 'https://app-hackathon-espam.herokuapp.com/api/MostrarUsuarios';
     return new Promise ((resolve, reject) => {
       this.http.get(url).subscribe(res => {
         resolve(res);
@@ -41,7 +41,7 @@ export class UsuariosService {
     });
   }
   actualizar(data:any){
-    let  url = 'http://127.0.0.1:8000/api/ActualizarUsuario';
+    let  url = 'https://app-hackathon-espam.herokuapp.com/api/ActualizarUsuario';
     return new Promise ((resolve, reject) => {
       this.http.put(url,data).subscribe(res => {
         resolve(res);
@@ -51,7 +51,7 @@ export class UsuariosService {
     });
   }
    eliminar(id) {
-    let  url = 'http://127.0.0.1:8000/api/EliminarUsuario/'+id;
+    let  url = 'https://app-hackathon-espam.herokuapp.com/api/EliminarUsuario/'+id;
     return new Promise ((resolve, reject) => {
       this.http.delete(url).subscribe(res => {
         resolve(res);
