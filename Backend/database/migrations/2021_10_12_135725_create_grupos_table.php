@@ -16,7 +16,7 @@ class CreateGruposTable extends Migration
         Schema::create('grupos', function (Blueprint $table) {
             $table->bigIncrements('id_grupo');
             $table->unsignedBigInteger('id_estudiante');
-            $table->string('grupo');
+            $table->integer('grupo');
 
             $table->foreign('id_estudiante')->references('id_estudiante')->on('estudiantes')->onDelete('cascade');
 
