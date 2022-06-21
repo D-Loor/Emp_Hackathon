@@ -217,4 +217,13 @@ class GrupoController extends Controller
    
     }
        
+
+    public function ObtenerEstudianteGrupo($id_estudiante)
+    {
+        $datos=Grupo::where('id_estudiante', $id_estudiante)->get()->first();
+        if($datos != null){
+            return response()->json(['result'=>$datos, 'code'=>'201']);
+        }else
+            return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
+    }
 }

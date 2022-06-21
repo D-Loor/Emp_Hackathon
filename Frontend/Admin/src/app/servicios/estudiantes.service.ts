@@ -62,4 +62,28 @@ export class EstudiantesService {
       });
     });
   }
+
+  obtener_estudiante(id) {
+    let  url = 'https://app-hackathon-espam.herokuapp.com/api/ObtenerEstudiante/'+id;
+    return new Promise ((resolve, reject) => {
+      this.http.get(url).subscribe(res => {
+        resolve(res);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
+  actualizar_estudiante(data:any){
+    let  url = 'https://app-hackathon-espam.herokuapp.com/api/Estudiante';
+    return new Promise ((resolve, reject) => {
+      this.http.put(url,data).subscribe(res => {
+        resolve(res);{
+
+        }
+      }, error => {
+        reject(error);
+      });
+    });
+  }
 }

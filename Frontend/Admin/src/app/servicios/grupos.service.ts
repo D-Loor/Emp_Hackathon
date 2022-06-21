@@ -77,4 +77,16 @@ export class GruposService {
       });
     });
   }
+
+  obtener_grupo_estudiante(id) {
+    let  url = 'https://app-hackathon-espam.herokuapp.com/api/ObtenerGrupoEstudiante/'+id;
+    return new Promise ((resolve, reject) => {
+      this.http.get(url).subscribe(res => {
+        resolve(res);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+
 }

@@ -41,7 +41,8 @@
                     <td>{{item.cedula}}</td>
                     <td>{{item.carrera.nombre}}</td>
                     <td class="text-center">
-                        <button _ngcontent-acp-c8="" (click)=" eliminar_estu(item.id_estudiante,item.nombres,item.apellidos)" class="btn btn-warning btn-outline-warning btn-icon botonedi"><i _ngcontent-acp-c8="" class="icofont icofont-trash icono"></i></button>
+                      <button _ngcontent-acp-c8="" (click)=" editar_estu(item.id_estudiante)" class="btn btn-warning btn-outline-warning btn-icon botonedi"><i _ngcontent-acp-c8="" class="icofont icofont-edit icono"></i></button>
+                      <button _ngcontent-acp-c8="" (click)=" eliminar_estu(item.id_estudiante,item.nombres,item.apellidos)" class="btn  btn-outline-danger btn-icon botonedi"><i _ngcontent-acp-c8="" class="icofont icofont-trash icono"></i></button>
                     </td> 
                   
                   </tr>

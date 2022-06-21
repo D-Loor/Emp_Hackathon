@@ -114,6 +114,15 @@ class EstudianteController extends Controller
         //
     }
 
+    public function ObtenerEstudiante($id_estudiante)
+    {
+        $datos=Estudiante::find($id_estudiante);
+        if($datos != null){
+            return response()->json(['result'=>$datos, 'code'=>'201']);
+        }else
+            return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -123,7 +132,19 @@ class EstudianteController extends Controller
      */
     public function update(Request $request, Estudiante $estudiante)
     {
-        //
+
+        $datos=Estudiante::find($request->id_estudiante);
+        if($datos != null){
+            $datos->nombres=$request->nombres;
+            $datos->apellidos=$request->apellidos;
+            $datos->cedula=$request->cedula;
+            $datos->id_carrera=$request->id_carrera;
+            $datos->id_evento=$request->id_evento;
+            $datos->update();
+            return response()->json(['result'=>"Dato Actualizado", 'code'=>'201']);
+        }else
+            return response()->json(['result'=>"Registro no encontrado", 'code'=>'202']);
+
     }
 
     /**

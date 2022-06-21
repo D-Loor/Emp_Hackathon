@@ -37,6 +37,8 @@ Route::post('IngresarUsuario','App\Http\Controllers\UsuarioController@ingresar')
 Route::get('MostrarUsuarios','App\Http\Controllers\UsuarioController@mostrar');
 Route::put('ActualizarUsuario','App\Http\Controllers\UsuarioController@actualizar');
 Route::post('actualizarEvento','App\Http\Controllers\EventoController@actualizar');
+Route::get('ObtenerEstudiante/{id}','App\Http\Controllers\EstudianteController@ObtenerEstudiante');
+Route::get('ObtenerGrupoEstudiante/{id_estu}','App\Http\Controllers\GrupoController@ObtenerEstudianteGrupo');
 //reportes
 Route::get('ReporteGrupos/{id}/{fecha}','App\Http\Controllers\GrupoController@GenerarPDF');
 //página Hackathon

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EstudiantesService } from '../../../servicios/estudiantes.service';
 import Swal from 'sweetalert2';
 import { EventosService } from '../../../servicios/eventos.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-mostrar',
@@ -10,14 +11,14 @@ import { EventosService } from '../../../servicios/eventos.service';
 })
 export class MostrarComponent implements OnInit {
 
-  even="";
+  public even="";
   buscado="";
   estudiantes=[];
   eventos=[];
   
 p:any;
   ClsEvento="form-control";
-  constructor(private estudiantes_service:EstudiantesService,private eventos_service:EventosService) { }
+  constructor(private estudiantes_service:EstudiantesService,private eventos_service:EventosService,private router: Router) { }
 
   ngOnInit() {
     this.cargar_even();
@@ -166,6 +167,11 @@ p:any;
       }
     })
 
+  }
+
+  editar_estu(id_estudiante){
+    localStorage.setItem("id_estudiante",id_estudiante);
+    this.router.navigateByUrl("/estudiantes");
   }
 
 }

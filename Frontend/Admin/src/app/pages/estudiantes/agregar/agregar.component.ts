@@ -1,18 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { EstudiantesService } from '../../../servicios/estudiantes.service';
 import { CarrerasService } from '../../../servicios/carreras.service';
 import { EventosService } from '../../../servicios/eventos.service';
 import { GruposService } from '../../../servicios/grupos.service';
 import Swal from 'sweetalert2'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-agregar',
   templateUrl: './agregar.component.html',
   styleUrls: ['./agregar.component.scss']
 })
-export class AgregarComponent implements OnInit {
+export class AgregarComponent implements OnInit, OnDestroy {
 
-  constructor(private grupo_service:GruposService,private evento_service: EventosService, private estudiante_service:EstudiantesService, private carrera_service:CarrerasService) { }
+  constructor(private grupo_service:GruposService,private router: Router,private evento_service: EventosService, private estudiante_service:EstudiantesService, private carrera_service:CarrerasService) { }
 
   nombres="";
   apellidos="";
@@ -24,6 +25,8 @@ export class AgregarComponent implements OnInit {
   invalido=false;
   eventoa=false;
   valgurpo=false;
+
+  accion="";
 
   ClsNombres="form-control";
   ClsGrupo="form-control";
@@ -39,6 +42,27 @@ export class AgregarComponent implements OnInit {
   ngOnInit() {
     this.Cevento();
     this.carreras();
+
+    if(localStorage.getItem('id_estudiante')){
+      this.accion="Actualizar Estudiante";
+      this.estudiante_service.obtener_estudiante(localStorage.getItem('id_estudiante')).then(data =>{
+        this.nombres=data['nombres'];
+        this.apellidos=data['apellidos'];
+        this.cedula=data['cedula'];
+        this.evento=data['id_evento'];
+        this.carrera=data['id_carrera'];
+        this.grupo_service.obtener_grupo_estudiante(localStorage.getItem('id_estudiante')).then(result =>{
+          
+          this.grupo=result['grupo'];
+        }).catch(error =>{
+          console.log(error);
+        });
+
+      }).catch(error =>{
+        console.log(error);
+      });
+    }else
+      this.accion="Registrar Estudiante";
   }
 
 
@@ -209,105 +233,196 @@ export class AgregarComponent implements OnInit {
 
     }else
     {
-      Swal.fire({
-        title: '¿Desea registrar estudiante?',
-        showDenyButton: true,
-        showCancelButton: false,
-        showCloseButton: true,      
-        confirmButtonColor: '#4ea175',
-        denyButtonColor: '#FFB64D',
-        confirmButtonText: 'Registrar',
-        denyButtonText: `Cancelar`,
-      }).then((result) => {
-        if (result.isConfirmed) {
-  
-          let array={
-            "nombres":this.nombres,
-            "apellidos":this.apellidos,
-            "cedula":this.cedula,
-            "id_carrera":this.carrera,
-            "id_evento":this.evento
-          }
-          
-          this.estudiante_service.registrar(array).then(data =>{
+      if(localStorage.getItem('id_estudiante')){
+        Swal.fire({
+          title: '¿Desea actualizar el estudiante?',
+          showDenyButton: true,
+          showCancelButton: false,
+          showCloseButton: true,      
+          confirmButtonColor: '#4ea175',
+          denyButtonColor: '#FFB64D',
+          confirmButtonText: 'Actualizar',
+          denyButtonText: `Cancelar`,
+        }).then((result) => {
+          if (result.isConfirmed) {
     
-            if(data['code']==400){
-              const Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                  toast.addEventListener('mouseenter', Swal.stopTimer)
-                  toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
-              })
-              
-              Toast.fire({
-                icon: 'info',
-                title: 'Estudiante ya se encuentra registrado.'
-              })
+            let array={
+              "id_estudiante":localStorage.getItem('id_estudiante'),
+              "nombres":this.nombres,
+              "apellidos":this.apellidos,
+              "cedula":this.cedula,
+              "id_carrera":this.carrera,
+              "id_evento":this.evento
+            }
+            
+            this.estudiante_service.actualizar_estudiante(array).then(data =>{
       
-            }else{
-              if(this.valgurpo==true){
+              if(data['code']==200){
+                const Toast = Swal.mixin({
+                  toast: true,
+                  position: 'top-end',
+                  showConfirmButton: false,
+                  timer: 3000,
+                  timerProgressBar: true,
+                  didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                  }
+                })
                 
-                let array={
-                  "nombre":this.grupo,
-                  "id_estudiante":data['id'].id_estudiante
-                }
+                Toast.fire({
+                  icon: 'success',
+                  title: 'Se ha actulizado el estudiante.'
+                })
                 
-                this.grupo_service.registrar(array).then(data =>{
-          
-                }).catch(error =>{
-                  console.log(error);
-                });  
+                this.router.navigateByUrl("/estudiantes");
+              }else{
+                                
+                const Toast = Swal.mixin({
+                  toast: true,
+                  position: 'top-end',
+                  showConfirmButton: false,
+                  timer: 3000,
+                  timerProgressBar: true,
+                  didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                  }
+                })
+                
+                Toast.fire({
+                  icon: 'error',
+                  title: '¡No se ha actualizado..!'
+                })
+        
+               
               }
-              
-              const Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                  toast.addEventListener('mouseenter', Swal.stopTimer)
-                  toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
-              })
-              
-              Toast.fire({
-                icon: 'success',
-                title: '¡Registro Exitoso..!'
-              })
+            }).catch(error =>{
+              console.log(error);
+            });
+           
+          } else if (result.isDenied) {
+            const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 3000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+              }
+            })
+            
+            Toast.fire({
+              icon: 'info',
+              title: '¡Proceso cancelado..!'
+            })
+          }
+        })
+      }
+      else{
+        Swal.fire({
+          title: '¿Desea registrar estudiante?',
+          showDenyButton: true,
+          showCancelButton: false,
+          showCloseButton: true,      
+          confirmButtonColor: '#4ea175',
+          denyButtonColor: '#FFB64D',
+          confirmButtonText: 'Registrar',
+          denyButtonText: `Cancelar`,
+        }).then((result) => {
+          if (result.isConfirmed) {
+    
+            let array={
+              "nombres":this.nombres,
+              "apellidos":this.apellidos,
+              "cedula":this.cedula,
+              "id_carrera":this.carrera,
+              "id_evento":this.evento
+            }
+            
+            this.estudiante_service.registrar(array).then(data =>{
       
-             
-            }
-           this.registro=true;
-            this.limpiar();
-          }).catch(error =>{
-            console.log(error);
-          });
-         
-        } else if (result.isDenied) {
-          const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-              toast.addEventListener('mouseenter', Swal.stopTimer)
-              toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-          })
-          
-          Toast.fire({
-            icon: 'info',
-            title: '¡Proceso cancelado..!'
-          })
-        }
-      })
+              if(data['code']==400){
+                const Toast = Swal.mixin({
+                  toast: true,
+                  position: 'top-end',
+                  showConfirmButton: false,
+                  timer: 3000,
+                  timerProgressBar: true,
+                  didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                  }
+                })
+                
+                Toast.fire({
+                  icon: 'info',
+                  title: 'Estudiante ya se encuentra registrado.'
+                })
+        
+              }else{
+                if(this.valgurpo==true){
+                  
+                  let array={
+                    "nombre":this.grupo,
+                    "id_estudiante":data['id'].id_estudiante
+                  }
+                  
+                  this.grupo_service.registrar(array).then(data =>{
+            
+                  }).catch(error =>{
+                    console.log(error);
+                  });  
+                }
+                
+                const Toast = Swal.mixin({
+                  toast: true,
+                  position: 'top-end',
+                  showConfirmButton: false,
+                  timer: 3000,
+                  timerProgressBar: true,
+                  didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                  }
+                })
+                
+                Toast.fire({
+                  icon: 'success',
+                  title: '¡Registro Exitoso..!'
+                })
+        
+               
+              }
+             this.registro=true;
+              this.limpiar();
+            }).catch(error =>{
+              console.log(error);
+            });
+           
+          } else if (result.isDenied) {
+            const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 3000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+              }
+            })
+            
+            Toast.fire({
+              icon: 'info',
+              title: '¡Proceso cancelado..!'
+            })
+          }
+        })
+      }
+      
 
       
 
@@ -335,6 +450,10 @@ export class AgregarComponent implements OnInit {
     });
 
     
+  }
+
+  ngOnDestroy() {
+    localStorage.removeItem('id_estudiante');
   }
   
 }
